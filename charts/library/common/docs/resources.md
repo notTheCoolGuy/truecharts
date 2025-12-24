@@ -5,7 +5,7 @@ title: Resources
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/resources#full-examples) section for complete examples.
+- See the [Full Examples](resources.md#full-examples) section for complete examples.
 
 :::
 
@@ -29,7 +29,7 @@ resources:
 
 ## `resources.limits`
 
-See [Resources Limits](/truecharts-common/container/resources#resourceslimits)
+See [Resources Limits](container/resources.md#resourceslimits)
 
 Default
 
@@ -44,7 +44,7 @@ resources:
 
 ### `resources.limits.cpu`
 
-See [Resources Limits CPU](/truecharts-common/container/resources#resourceslimitscpu)
+See [Resources Limits CPU](container/resources.md#resourceslimitscpu)
 
 Default
 
@@ -58,7 +58,7 @@ resources:
 
 ### `resources.limits.memory`
 
-See [Resources Limits Memory](/truecharts-common/container/resources#resourceslimitsmemory)
+See [Resources Limits Memory](container/resources.md#resourceslimitsmemory)
 
 Default
 
@@ -72,7 +72,7 @@ resources:
 
 ### `resources.requests."gpu.intel.com/i915"`
 
-See [Resources Requests GPU](/truecharts-common/container/resources#resourceslimitsgpuintelcomi915)
+See [Resources Requests GPU](container/resources.md#resourceslimitsgpuintelcomi915)
 
 Default: `not set`
 
@@ -80,7 +80,7 @@ Default: `not set`
 
 #### `resources.limits."nvidia.com/gpu"`
 
-See [Resources Limits GPU](/truecharts-common/container/resources#resourceslimitsnvidiacomgpu)
+See [Resources Limits GPU](container/resources.md#resourceslimitsnvidiacomgpu)
 
 Default: `not set`
 
@@ -88,7 +88,7 @@ Default: `not set`
 
 #### `resources.limits."amd.com/gpu"`
 
-See [Resources Limits GPU](/truecharts-common/container/resources#resourceslimitsamdcomgpu)
+See [Resources Limits GPU](container/resources.md#resourceslimitsamdcomgpu)
 
 Default: `not set`
 
@@ -96,7 +96,7 @@ Default: `not set`
 
 ## `resources.requests`
 
-See [Resources Requests](/truecharts-common/container/resources#resourcesrequests)
+See [Resources Requests](container/resources.md#resourcesrequests)
 
 Default
 
@@ -111,7 +111,7 @@ resources:
 
 ### `resources.requests.cpu`
 
-See [Resources Requests CPU](/truecharts-common/container/resources#resourcesrequestscpu)
+See [Resources Requests CPU](container/resources.md#resourcesrequestscpu)
 
 Default
 
@@ -125,7 +125,7 @@ resources:
 
 ### `resources.requests.memory`
 
-See [Resources Requests Memory](/truecharts-common/container/resources#resourcesrequestsmemory)
+See [Resources Requests Memory](container/resources.md#resourcesrequestsmemory)
 
 Default
 

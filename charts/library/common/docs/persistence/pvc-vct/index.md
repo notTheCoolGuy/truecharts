@@ -5,7 +5,7 @@ title: PVC / VCT
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/persistence/pvc-vct#full-examples) section for complete examples.
+- See the [Full Examples](index.md#full-examples) section for complete examples.
 
 :::
 
@@ -15,7 +15,7 @@ title: PVC / VCT
 
 :::tip
 
-- See available persistence keys [here](/truecharts-common/persistence).
+- See available persistence keys [here](../index.md).
 - This options apply only when `type: pvc` or `type: vct`.
 
 :::
@@ -101,7 +101,7 @@ This does not **guarantee** that the resource will be retained.
 | Type       | `bool`                                                 |
 | Required   | ❌                                                     |
 | Helm `tpl` | ❌                                                     |
-| Default    | See default [here](/truecharts-common/fallbackdefaults#pvcretain) |
+| Default    | See default [here](../../fallbackDefaults.md#pvcretain) |
 
 Example
 
@@ -123,7 +123,7 @@ Define the accessModes of the PVC, if it's single can be defined as a string, mu
 | Type       | `string` or `list`                                       |
 | Required   | ❌                                                       |
 | Helm `tpl` | ✅                                                       |
-| Default    | See default [here](/truecharts-common/fallbackdefaults#accessmodes) |
+| Default    | See default [here](../../fallbackDefaults.md#accessmodes) |
 
 Example
 
@@ -195,7 +195,7 @@ Define the size of the PVC
 | Type       | `string`                                                                                                |
 | Required   | ❌                                                                                                      |
 | Helm `tpl` | ✅                                                                                                      |
-| Default    | See default [pvcSize](/truecharts-common/fallbackdefaults#pvcsize) and [vctSize](/truecharts-common/fallbackdefaults#vctsize) |
+| Default    | See default [pvcSize](../../fallbackDefaults.md#pvcsize) and [vctSize](../../fallbackDefaults.md#vctsize) |
 
 Example
 
@@ -216,7 +216,7 @@ Define the storageClass to use
 - If storageClass is defined on the `persistence`
   - `-` **->** `""`, (which means requesting a PV without class)
   - Else **->** as is
-- Else if [fallback storageClass](/truecharts-common/fallbackdefaults#storageclass), **->** this
+- Else if [fallback storageClass](../../fallbackDefaults.md#storageclass), **->** this
 - Else **->** _nothing_ (which means requesting a PV without class)
 
 :::
@@ -348,9 +348,9 @@ Define the mode of the static provisioning
 
 Valid Values
 
-- [`nfs`](/truecharts-common/persistence/pvc-vct/static-nfs)
-- [`smb`](/truecharts-common/persistence/pvc-vct/static-smb)
-- [`custom`](/truecharts-common/persistence/pvc-vct/static-custom)
+- [`nfs`](static-nfs.md)
+- [`smb`](static-smb.md)
+- [`custom`](static-custom.md)
 
 Example
 

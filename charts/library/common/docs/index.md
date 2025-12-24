@@ -5,7 +5,7 @@ title: Common Chart Documentation
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common#full-examples) section for complete examples.
+- See the [Full Examples](index.md#full-examples) section for complete examples.
 
 :::
 
@@ -31,7 +31,7 @@ Global values that apply to all charts
 
 :::note
 
-See more info about global values [here](/truecharts-common/global)
+See more info about global values [here](global.md)
 
 :::
 
@@ -41,7 +41,7 @@ See more info about global values [here](/truecharts-common/global)
 | Type       | `map`                               |
 | Required   | ❌                                   |
 | Helm `tpl` | ❌                                   |
-| Default    | See [here](/truecharts-common/global#defaults) |
+| Default    | See [here](global.md#defaults) |
 
 Example
 
@@ -57,7 +57,7 @@ The fallback defaults are used when a value is not defined in the chart.
 
 :::note
 
-- See more info about fallbackDefaults [here](/truecharts-common/fallbackdefaults)
+- See more info about fallbackDefaults [here](fallbackDefaults.md)
 
 :::
 
@@ -67,7 +67,7 @@ The fallback defaults are used when a value is not defined in the chart.
 | Type       | `map`                                         |
 | Required   | ❌                                             |
 | Helm `tpl` | ❌                                             |
-| Default    | See [here](/truecharts-common/fallbackdefaults#defaults) |
+| Default    | See [here](fallbackDefaults.md#defaults) |
 
 ---
 
@@ -236,7 +236,7 @@ Options that apply to all pods, unless overridden at the pod level
 
 :::note
 
-See more info about podOptions [here](/truecharts-common/podoptions)
+See more info about podOptions [here](podOptions.md)
 
 :::
 
@@ -246,7 +246,7 @@ See more info about podOptions [here](/truecharts-common/podoptions)
 | Type       | `map`                                   |
 | Required   | ❌                                       |
 | Helm `tpl` | ❌                                       |
-| Default    | See [here](/truecharts-common/podoptions#defaults) |
+| Default    | See [here](podOptions.md#defaults) |
 
 Example
 
@@ -279,7 +279,7 @@ Options that apply to all containers, unless overridden at the container level
 
 :::note
 
-See more info about containerOptions [here](/truecharts-common/containeroptions)
+See more info about containerOptions [here](containerOptions.md)
 
 :::
 
@@ -289,7 +289,7 @@ See more info about containerOptions [here](/truecharts-common/containeroptions)
 | Type       | `map`                                         |
 | Required   | ❌                                             |
 | Helm `tpl` | ❌                                             |
-| Default    | See [here](/truecharts-common/containeroptions#defaults) |
+| Default    | See [here](containerOptions.md#defaults) |
 
 Example
 
@@ -349,7 +349,7 @@ Resources apply to **EACH** container, not to the pod as a whole.
 | Type       | `map`                                  |
 | Required   | ✅                                      |
 | Helm `tpl` | ❌                                      |
-| Default    | See [here](/truecharts-common/resources#defaults) |
+| Default    | See [here](resources.md#defaults) |
 
 Example
 
@@ -371,7 +371,7 @@ Define security context for all containers and pods, unless overridden at the co
 
 :::note
 
-See more info about securityContext [here](/truecharts-common/securitycontext)
+See more info about securityContext [here](securityContext.md)
 
 :::
 
@@ -381,7 +381,7 @@ See more info about securityContext [here](/truecharts-common/securitycontext)
 | Type       | `map`                                        |
 | Required   | ✅                                            |
 | Helm `tpl` | ❌                                            |
-| Default    | See [here](/truecharts-common/securitycontext#defaults) |
+| Default    | See [here](securityContext.md#defaults) |
 
 Example
 
@@ -415,7 +415,7 @@ securityContext:
 
 :::tip
 
-Use [`imageSelector`](/truecharts-common/container#imageselector) to select the image to use for a container.
+Use [`imageSelector`](container/index.md#imageselector) to select the image to use for a container.
 
 :::
 
@@ -543,27 +543,27 @@ image:
 
 ## Additional Documentation
 
-- [configmap](/truecharts-common/configmap)
-- [container](/truecharts-common/container)
-- [containerOptions](/truecharts-common/containeroptions)
-- [imagePullSecret](/truecharts-common/imagepullsecret)
-- [ingress](/truecharts-common/ingress)
-- [notes](/truecharts-common/notes)
-- [persistence](/truecharts-common/persistence)
-- [podDisruptionBudget](/truecharts-common/poddisruptionbudget)
-- [priorityClass](/truecharts-common/priorityclass)
-- [rbac](/truecharts-common/rbac)
-- [resources](/truecharts-common/resources)
-- [secret](/truecharts-common/secret)
-- [securityContext](/truecharts-common/securitycontext)
-- [service](/truecharts-common/service)
-- [serviceAccount](/truecharts-common/serviceaccount)
-- [storageClass](/truecharts-common/storageclass)
-- [volumeSnapshot](/truecharts-common/volumesnapshot)
-- [volumeSnapshotClass](/truecharts-common/volumesnapshotclass)
-- [webhook](/truecharts-common/webhook)
-- [webhook](/truecharts-common/webhook)
-- [workload](/truecharts-common/workload)
+- [configmap](configmap.md)
+- [container](container/index.md)
+- [containerOptions](containerOptions.md)
+- [imagePullSecret](imagePullSecret.md)
+- [ingress](ingress/index.md)
+- [notes](notes.md)
+- [persistence](persistence/index.md)
+- [podDisruptionBudget](podDisruptionBudget.md)
+- [priorityClass](priorityClass.md)
+- [rbac](rbac.md)
+- [resources](resources.md)
+- [secret](secret.md)
+- [securityContext](securityContext.md)
+- [service](service/index.md)
+- [serviceAccount](serviceAccount.md)
+- [storageClass](storageClass.md)
+- [volumeSnapshot](volumeSnapshot.md)
+- [volumeSnapshotClass](volumeSnapshotClass.md)
+- [webhook](webhook.md)
+- [webhook](webhook.md)
+- [workload](workload/index.md)
 
 ---
 

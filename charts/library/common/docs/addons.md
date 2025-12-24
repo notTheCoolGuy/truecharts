@@ -5,7 +5,7 @@ title: Addons
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/addons#full-examples) section for complete examples.
+- See the [Full Examples](addons.md#full-examples) section for complete examples.
 
 :::
 
@@ -122,7 +122,7 @@ Define additional options for the container
 
 :::tip
 
-See container options in the [container](/truecharts-common/container) section.
+See container options in the [container](container/index.md) section.
 
 :::
 

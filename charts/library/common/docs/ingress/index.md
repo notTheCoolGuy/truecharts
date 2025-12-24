@@ -5,7 +5,7 @@ title: Ingress
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/ingress#full-examples) section for complete examples.
+- See the [Full Examples](index.md#full-examples) section for complete examples.
 
 :::
 
@@ -604,7 +604,7 @@ ingress:
 
 Define the homepage integration for this ingress
 
-See more details in [Homepage Integration](/truecharts-common/ingress/homepage)
+See more details in [Homepage Integration](homepage.md)
 
 |            |                                       |
 | ---------- | ------------------------------------- |

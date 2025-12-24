@@ -5,7 +5,7 @@ title: Service
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/service#full-examples) section for complete examples.
+- See the [Full Examples](index.md#full-examples) section for complete examples.
 
 :::
 
@@ -174,15 +174,15 @@ Define the service type
 | Type       | `string`                                                         |
 | Required   | ❌                                                               |
 | Helm `tpl` | ✅                                                               |
-| Default    | See default [here](/truecharts-common/fallbackdefaults#servicetype) |
+| Default    | See default [here](../fallbackDefaults.md#servicetype) |
 
 Valid Values:
 
-- [`ClusterIP`](/truecharts-common/service/clusterip)
-- [`LoadBalancer`](/truecharts-common/service/loadbalancer)
-- [`NodePort`](/truecharts-common/service/nodeport)
-- [`ExternalName`](/truecharts-common/service/externalname)
-- [`ExternalIP`](/truecharts-common/service/externalip)
+- [`ClusterIP`](ClusterIP.md)
+- [`LoadBalancer`](LoadBalancer.md)
+- [`NodePort`](NodePort.md)
+- [`ExternalName`](ExternalName.md)
+- [`ExternalIP`](ExternalIP.md)
 
 Example
 
@@ -196,7 +196,7 @@ service:
 
 #### `expandObjectName`
 
-Whether to expand the object name (based on the [naming scheme](/truecharts-common/service#naming-scheme)) or not
+Whether to expand the object name (based on the [naming scheme](index.md#naming-scheme)) or not
 
 |            |                                  |
 | ---------- | -------------------------------- |
@@ -461,7 +461,7 @@ service:
 
 Define the ports of the service
 
-See [Ports](/truecharts-common/service/ports)
+See [Ports](ports.md)
 
 |            |                       |
 | ---------- | --------------------- |
@@ -507,8 +507,8 @@ service:
 
 Full examples can be found under each service type
 
-- [ClusterIP](/truecharts-common/service/clusterip)
-- [LoadBalancer](/truecharts-common/service/loadbalancer)
-- [NodePort](/truecharts-common/service/nodeport)
-- [ExternalName](/truecharts-common/service/externalname)
-- [ExternalIP](/truecharts-common/service/externalip)
+- [ClusterIP](ClusterIP.md)
+- [LoadBalancer](LoadBalancer.md)
+- [NodePort](NodePort.md)
+- [ExternalName](ExternalName.md)
+- [ExternalIP](ExternalIP.md)

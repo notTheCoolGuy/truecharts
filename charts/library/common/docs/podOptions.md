@@ -5,7 +5,7 @@ title: Pod Options
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/podoptions#full-examples) section for complete examples.
+- See the [Full Examples](podOptions.md#full-examples) section for complete examples.
 
 :::
 
@@ -46,7 +46,7 @@ podOptions:
 
 ## `enableServiceLinks`
 
-See [Enable Service Links](/truecharts-common/workload#enableservicelinks)
+See [Enable Service Links](workload/index.md#enableservicelinks)
 
 Default
 
@@ -59,7 +59,7 @@ podOptions:
 
 ## `hostNetwork`
 
-See [Host Network](/truecharts-common/workload#hostnetwork)
+See [Host Network](workload/index.md#hostnetwork)
 
 Default
 
@@ -72,7 +72,7 @@ podOptions:
 
 ## `hostPID`
 
-See [Host PID](/truecharts-common/workload#hostpid)
+See [Host PID](workload/index.md#hostpid)
 
 Default
 
@@ -85,7 +85,7 @@ podOptions:
 
 ## `hostIPC`
 
-See [Host IPC](/truecharts-common/workload#hostipc)
+See [Host IPC](workload/index.md#hostipc)
 
 Default
 
@@ -98,7 +98,7 @@ podOptions:
 
 ## `hostUsers`
 
-See [Host Users](/truecharts-common/workload#hostusers)
+See [Host Users](workload/index.md#hostusers)
 
 Default
 
@@ -111,7 +111,7 @@ podOptions:
 
 ## `shareProcessNamespace`
 
-See [Share Process Namespace](/truecharts-common/workload#shareprocessnamespace)
+See [Share Process Namespace](workload/index.md#shareprocessnamespace)
 
 Default
 
@@ -124,7 +124,7 @@ podOptions:
 
 ## `restartPolicy`
 
-See [Restart Policy](/truecharts-common/workload#restartpolicy)
+See [Restart Policy](workload/index.md#restartpolicy)
 
 Default
 
@@ -137,7 +137,7 @@ podOptions:
 
 ## `dnsPolicy`
 
-See [DNS Policy](/truecharts-common/workload#dnspolicy)
+See [DNS Policy](workload/index.md#dnspolicy)
 
 Default
 
@@ -150,7 +150,7 @@ podOptions:
 
 ## `dnsConfig`
 
-See [DNS Config](/truecharts-common/workload#dnsconfig)
+See [DNS Config](workload/index.md#dnsconfig)
 
 Default
 
@@ -166,7 +166,7 @@ podOptions:
 
 ## `hostAliases`
 
-See [Host Aliases](/truecharts-common/workload#hostaliases)
+See [Host Aliases](workload/index.md#hostaliases)
 
 Default
 
@@ -179,7 +179,7 @@ podOptions:
 
 ## `nodeSelector`
 
-See [Node Selector](/truecharts-common/workload#nodeselector)
+See [Node Selector](workload/index.md#nodeselector)
 
 Default
 
@@ -206,7 +206,7 @@ podOptions:
 
 ## `topologySpreadConstraints`
 
-See [Topology Spread Constraints](/truecharts-common/workload#topologyspreadconstraints)
+See [Topology Spread Constraints](workload/index.md#topologyspreadconstraints)
 
 Default
 
@@ -219,7 +219,7 @@ podOptions:
 
 ## `tolerations`
 
-See [Tolerations](/truecharts-common/workload#tolerations)
+See [Tolerations](workload/index.md#tolerations)
 
 Default
 
@@ -232,7 +232,7 @@ podOptions:
 
 ## `schedulerName`
 
-See [Scheduler Name](/truecharts-common/workload#schedulername)
+See [Scheduler Name](workload/index.md#schedulername)
 
 Default
 
@@ -245,7 +245,7 @@ podOptions:
 
 ## `priorityClassName`
 
-See [Priority Class Name](/truecharts-common/workload#priorityclassname)
+See [Priority Class Name](workload/index.md#priorityclassname)
 
 Default
 
@@ -258,7 +258,7 @@ podOptions:
 
 ## `runtimeClassName`
 
-See [Runtime Class Name](/truecharts-common/workload#runtimeclassname)
+See [Runtime Class Name](workload/index.md#runtimeclassname)
 
 Default
 
@@ -271,7 +271,7 @@ podOptions:
 
 ## `automountServiceAccountToken`
 
-See [Automount Service Account Token](/truecharts-common/workload#automountserviceaccounttoken)
+See [Automount Service Account Token](workload/index.md#automountserviceaccounttoken)
 
 Default
 
@@ -284,7 +284,7 @@ podOptions:
 
 ## `terminationGracePeriodSeconds`
 
-See [Termination Grace Period Seconds](/truecharts-common/workload#terminationgraceperiodseconds)
+See [Termination Grace Period Seconds](workload/index.md#terminationgraceperiodseconds)
 
 Default
 

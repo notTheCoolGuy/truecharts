@@ -5,7 +5,7 @@ title: Containers / Init Containers
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/container#full-examples) section for complete examples.
+- See the [Full Examples](index.md#full-examples) section for complete examples.
 
 :::
 
@@ -200,25 +200,25 @@ workload:
 
 ## `command`
 
-See [command](/truecharts-common/container/command)
+See [command](command.md)
 
 ---
 
 ## `args`
 
-See [args](/truecharts-common/container/args#args)
+See [args](args.md#args)
 
 ---
 
 ## `extraArgs`
 
-See [extraArgs](/truecharts-common/container/args#extraargs)
+See [extraArgs](args.md#extraargs)
 
 ---
 
 ## `termination`
 
-See [termination](/truecharts-common/container/termination)
+See [termination](termination.md)
 
 ---
 
@@ -230,7 +230,7 @@ Does **not** apply to `initContainers`
 
 :::
 
-See [lifecycle](/truecharts-common/container/lifecycle)
+See [lifecycle](lifecycle.md)
 
 ---
 
@@ -242,43 +242,43 @@ Does **not** apply to `initContainers`
 
 :::
 
-See [probes](/truecharts-common/container/probes)
+See [probes](probes.md)
 
 ---
 
 ## `resources`
 
-See [resources](/truecharts-common/resources)
+See [resources](../resources.md)
 
 ---
 
 ## `securityContext`
 
-See [securityContext](/truecharts-common/securitycontext)
+See [securityContext](../securityContext.md)
 
 ---
 
 ## `envFrom`
 
-See [envFrom](/truecharts-common/container/envfrom)
+See [envFrom](envFrom.md)
 
 ---
 
 ## `fixedEnv`
 
-See [fixedEnv](/truecharts-common/container/fixedenv)
+See [fixedEnv](fixedEnv.md)
 
 ---
 
 ## `env`
 
-See [env](/truecharts-common/container/env)
+See [env](env.md)
 
 ---
 
 ## `envList`
 
-See [envList](/truecharts-common/container/envlist)
+See [envList](envList.md)
 
 ---
 

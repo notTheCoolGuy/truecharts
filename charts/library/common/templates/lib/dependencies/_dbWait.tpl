@@ -58,7 +58,7 @@ command:
     do
       response=$(
           timeout -s 3 2 \
-          valkey-cli \
+          redis-cli \
             -h "$REDIS_HOST" \
             -p "$REDIS_PORT" \
             ping

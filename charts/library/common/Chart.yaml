@@ -29,11 +29,7 @@ maintainers:
 name: common
 sources:
   - https://github.com/truecharts/containers/tree/master/apps/alpine
-  - https://github.com/truecharts/containers/tree/master/apps/gluetun
   - https://github.com/truecharts/containers/tree/master/apps/netshoot
-  - https://github.com/truecharts/containers/tree/master/apps/openvpn-client
-  - https://github.com/truecharts/containers/tree/master/apps/tailscale
-  - https://github.com/truecharts/containers/tree/master/apps/wireguard
   - https://github.com/trueforge-org/truecharts/tree/master/charts/library/common
   - https://hub.docker.com/_/
 type: library

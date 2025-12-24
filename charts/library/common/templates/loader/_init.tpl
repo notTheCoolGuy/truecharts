@@ -12,21 +12,6 @@
   {{/* Autogenerate redis passwords if needed */}}
   {{- include "tc.v1.common.dependencies.redis.injector" . }}
 
-  {{/* Enable code-server add-on if required */}}
-  {{- if .Values.addons.codeserver.enabled }}
-    {{- include "tc.v1.common.addon.codeserver" . }}
-  {{- end -}}
-
-  {{/* Enable gluetun add-on if required */}}
-  {{- if and .Values.addons.gluetun .Values.addons.gluetun.enabled -}}
-    {{- include "tc.v1.common.addon.gluetun" . }}
-  {{- end -}}
-
-  {{/* Enable tailscale add-on if required */}}
-  {{- if and .Values.addons.tailscale .Values.addons.tailscale.enabled -}}
-    {{- include "tc.v1.common.addon.tailscale" . }}
-  {{- end -}}
-
   {{/* Enable netshoot add-on if required */}}
   {{- if and .Values.addons.netshoot .Values.addons.netshoot.enabled }}
     {{- include "tc.v1.common.addon.netshoot" . }}

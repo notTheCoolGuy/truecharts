@@ -49,10 +49,7 @@ COnfigure the addon
 
 Available addons:
 
-- CodeServer
 - Netshoot
-- GlueTun
-- Tailscale
 
 :::
 
@@ -68,10 +65,7 @@ Example
 
 ```yaml
 addons:
-  codeserver: {}
   netshoot: {}
-  gluetun: {}
-  tailscale: {}
 ```
 
 ---
@@ -92,7 +86,7 @@ Example
 
 ```yaml
 addons:
-  codeserver:
+  netshoot:
     enabled: true
 ```
 
@@ -114,7 +108,7 @@ Example
 
 ```yaml
 addons:
-  codeserver:
+  netshoot:
     targetSelector:
       - main
       - other-workload
@@ -144,80 +138,8 @@ Example
 
 ```yaml
 addons:
-  codeserver:
+  netshoot:
     container: {}
-```
-
----
-
-#### `addons.$addon.service`
-
-Define additional options for the service
-
-:::tip
-
-See service options in the [service](/truecharts-common/service) section.
-
-:::
-
-:::note
-
-Only applies to:
-
-- Codeserver
-
-:::
-
-|            |                                                 |
-| ---------- | ----------------------------------------------- |
-| Key        | `addons.$addon.service`                         |
-| Type       | `map`                                           |
-| Required   | ❌                                               |
-| Helm `tpl` | ❌                                               |
-| Default    | Depends on the addon (See common's values.yaml) |
-
-Example
-
-```yaml
-addons:
-  codeserver:
-    service: {}
-```
-
----
-
-#### `addons.$addon.ingress`
-
-Define additional options for the ingress
-
-:::tip
-
-See ingress options in the [ingress](/truecharts-common/ingress) section.
-
-:::
-
-:::note
-
-Only applies to:
-
-- Codeserver
-
-:::
-
-|            |                                                 |
-| ---------- | ----------------------------------------------- |
-| Key        | `addons.$addon.ingress`                         |
-| Type       | `map`                                           |
-| Required   | ❌                                               |
-| Helm `tpl` | ❌                                               |
-| Default    | Depends on the addon (See common's values.yaml) |
-
-Example
-
-```yaml
-addons:
-  codeserver:
-    ingress: {}
 ```
 
 ---
@@ -226,25 +148,15 @@ addons:
 
 ```yaml
 addons:
-  codeserver:
+  netshoot:
     enabled: true
     container:
       resources:
         limits:
           cpu: 3333m
           memory: 3333Mi
-    service:
-      enabled: true
-      ports:
-        codeserver:
-          enabled: true
-          port: 12345
-          targetPort: 12345
-    ingress:
-      enabled: true
-      hosts:
-        - host: code.chart-example.local
-          paths:
-            - path: /
-              pathType: Prefix
+      command:
+        - /bin/sh
+        - -c
+        - sleep infinity
 ```

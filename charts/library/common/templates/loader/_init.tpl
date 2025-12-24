@@ -14,7 +14,7 @@
 
   {{/* Enable netshoot add-on if required */}}
   {{- if and .Values.addons.netshoot .Values.addons.netshoot.enabled }}
-    {{- include "tc.v1.common.addon.netshoot" . }}
+    {{- include "tc.v1.common.addons.netshoot" . }}
   {{- end -}}
 
   {{/* Append database wait containers to pods */}}

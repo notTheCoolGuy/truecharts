@@ -1,7 +1,7 @@
 {{/*
 This template generates a random password and ensures it persists across updates/edits to the chart
 */}}
-{{- define "tc.v1.common.dependencies.redis.secret" -}}
+{{- define "tc.v1.common.lib.dependencies.redis.secret" -}}
 
 {{- if .Values.redis.enabled -}}
   {{- $dbIndex := .Values.redis.redisDatabase | default "0" -}}
@@ -37,12 +37,5 @@ data:
   plainhostpass: {{ $hostPass }}
   plainporthost: {{ $portHost }}
   plainhost: {{ $dbHost }}
-  {{- end -}}
-{{- end -}}
-
-{{- define "tc.v1.common.dependencies.redis.injector" -}}
-  {{- $secret := include "tc.v1.common.dependencies.redis.secret" . | fromYaml -}}
-  {{- if $secret -}}
-    {{- $_ := set .Values.secret (printf "%s-%s" .Release.Name "rediscreds") $secret -}}
   {{- end -}}
 {{- end -}}

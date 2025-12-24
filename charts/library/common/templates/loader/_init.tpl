@@ -10,7 +10,7 @@
   {{- include "tc.v1.common.lib.util.chartcontext" . -}}
 
   {{/* Autogenerate redis passwords if needed */}}
-  {{- include "tc.v1.common.dependencies.redis.injector" . }}
+  {{- include "tc.v1.common.lib.dependencies.redis.injector" . }}
 
   {{/* Enable netshoot add-on if required */}}
   {{- if and .Values.addons.netshoot .Values.addons.netshoot.enabled }}

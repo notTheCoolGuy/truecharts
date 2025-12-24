@@ -59,24 +59,6 @@
     {{- end -}}
   {{- end -}}
 
-  {{- $result := false -}}
-  {{- range .Values.cnpg -}}
-    {{- if .enabled -}}
-      {{- $result = true -}}
-    {{- end -}}
-  {{- end -}}
-
-  {{- if $result -}}
-    {{- $container := include "tc.v1.common.lib.deps.wait.cnpg" $ | fromYaml -}}
-    {{- if $container -}}
-      {{- range $.Values.workload -}}
-        {{- if not (hasKey .podSpec "initContainers") -}}
-          {{- $_ := set .podSpec "initContainers" dict -}}
-        {{- end -}}
-        {{- $_ := set .podSpec.initContainers "cnpg-wait" $container -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
 {{- end -}}
 
 {{- define "tc.v1.common.lib.deps.wait.redis" -}}
@@ -334,73 +316,4 @@ args:
         sleep 2
       done
     fi
-{{- end -}}
-
-{{- define "tc.v1.common.lib.deps.wait.cnpg" -}}
-enabled: true
-type: system
-imageSelector: postgresClientImage
-securityContext:
-  runAsUser: 568
-  runAsGroup: 568
-  readOnlyRootFilesystem: true
-  runAsNonRoot: true
-  allowPrivilegeEscalation: false
-  privileged: false
-  seccompProfile:
-    type: RuntimeDefault
-  capabilities:
-    add: []
-    drop:
-      - ALL
-resources:
-  excludeExtra: true
-  requests:
-    cpu: 10m
-    memory: 50Mi
-  limits:
-    cpu: 500m
-    memory: 512Mi
-command:
-  - "/bin/sh"
-  - "-c"
-  - |
-    /bin/sh <<'EOF'
-{{- range $name, $cnpg := .Values.cnpg -}}
-  {{- if $cnpg.enabled }}
-    echo "Executing DB waits..."
-    {{- $cnpgName := include "tc.v1.common.lib.chart.names.fullname" $ -}}
-    {{- $cnpgName = printf "%v-cnpg-%v" $cnpgName $name -}}
-
-    {{/* Wait RW CNPG */}}
-    {{- include "cnpg.wait.script" (dict "url" (printf "%s-rw" $cnpgName) "user" .user "db" .database "on" "CNPG RW") | nindent 4 -}}
-
-    {{- if and $cnpg.pooler $cnpg.pooler.enabled -}}
-      {{/* Wait RW Pooler */}}
-      {{- include "cnpg.wait.script" (dict "url" (printf "%s-pooler-rw" $cnpgName) "user" .user "db" .database "on" "CNPG Pooler RW") | nindent 4 -}}
-
-      {{/* Wait RO Pooler */}}
-      {{- if $cnpg.pooler.createRO -}}
-        {{- include "cnpg.wait.script" (dict "url" (printf "%s-pooler-ro" $cnpgName) "user" .user "db" .database "on" "CNPG Pooler RO") | nindent 4 -}}
-      {{- end -}}
-
-    {{- end -}}
-  {{- end -}}
-{{- end }}
-    echo "Done executing DB waits..."
-    EOF
-{{- end -}}
-
-{{- define "cnpg.wait.script" -}}
-  {{- $url := .url -}}
-  {{- $user := .user -}}
-  {{- $db := .db -}}
-  {{- $on := .on -}}
-echo "Testing Database availability on [{{ $on }}]"
-until
-  echo "Testing database on url: [{{ $url }}]"
-  pg_isready -U {{ $user }} -d {{ $db }} -h {{ $url }}
-  do sleep 5
-done
-echo "Database available on url: [{{ $url }}]"
 {{- end -}}

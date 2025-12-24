@@ -24,10 +24,6 @@ global:
   namespace: ""
   minNodePort: 9000
   stopAll: false
-  metallb:
-    addServiceAnnotations: true
-  traefik:
-    addServiceAnnotations: true
 ```
 
 ---
@@ -137,109 +133,6 @@ global:
   stopAll: false
 ```
 
-## `metallb`
-
-Settings for metallb integration
-
-|            |                  |
-| ---------- | ---------------- |
-| Key        | `global.metallb` |
-| Type       | `map`            |
-| Required   | ❌                |
-| Helm `tpl` | ❌                |
-
-Default
-
-```yaml
-global:
-  metallb:
-    addServiceAnnotations: true
-```
-
-Example
-
-```yaml
-global:
-  metallb:
-    addServiceAnnotations: false
-```
-
----
-
-## `traefik`
-
-Settings for traefik integration
-
-|            |                  |
-| ---------- | ---------------- |
-| Key        | `global.traefik` |
-| Type       | `map`            |
-| Required   | ❌                |
-| Helm `tpl` | ❌                |
-
-Default
-
-```yaml
-global:
-  traefik:
-    addServiceAnnotations: true
-```
-
-Example
-
-```yaml
-global:
-  traefik:
-    addServiceAnnotations: false
-```
-
----
-
-### `traefik.addServiceAnnotations`
-
-Add annotations to services for traefik
-
-|            |                                        |
-| ---------- | -------------------------------------- |
-| Key        | `global.traefik.addServiceAnnotations` |
-| Type       | `bool`                                 |
-| Required   | ❌                                      |
-| Helm `tpl` | ❌                                      |
-| Default    | `true`                                 |
-
-Example
-
-```yaml
-global:
-  traefik:
-    addServiceAnnotations: true
-```
-
----
-
-### `traefik.commonMiddlewares`
-
-Define middlewares that will be applied to all ingresses
-
-|            |                                     |
-| ---------- | ----------------------------------- |
-| Key        | `global.traefik.commonMiddlewares`  |
-| Type       | `list`                              |
-| Required   | ❌                                   |
-| Helm `tpl` | ❌                                   |
-| Default    | `[{name: tc-basic-secure-headers}]` |
-
-Example
-
-```yaml
-global:
-  traefik:
-    commonMiddlewares:
-      - name: tc-basic-secure-headers
-```
-
----
-
 ## Full Examples
 
 ```yaml
@@ -251,10 +144,4 @@ global:
   namespace: ""
   minNodePort: 9000
   stopAll: false
-  metallb:
-    addServiceAnnotations: true
-  traefik:
-    addServiceAnnotations: true
-    commonMiddlewares:
-      - name: tc-basic-secure-headers
 ```

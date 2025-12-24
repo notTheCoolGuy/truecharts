@@ -57,34 +57,6 @@
       {{/* Call class to create the object */}}
       {{- include "tc.v1.common.class.ingress" (dict "rootCtx" $ "objectData" $objectData) -}}
 
-      {{- $hasCertIssuer := false -}}
-      {{- if $objectData.integrations -}}
-        {{- if and $objectData.integrations.certManager $objectData.integrations.certManager.enabled -}}
-          {{- $hasCertIssuer = true -}}
-        {{- end -}}
-      {{- end -}}
-
-      {{- if not $hasCertIssuer -}}
-        {{- range $idx, $tlsData := $objectData.tls -}}
-          {{- if $tlsData.certificateIssuer -}}
-            {{- $certName := printf "%s-tls-%d" $objectData.name ($idx | int) -}}
-
-            {{- $certObjData := (dict
-                "name" $certName "shortName" $name
-                "hosts" $tlsData.hosts
-                "certificateIssuer" $tlsData.certificateIssuer
-            ) -}}
-
-            {{- include "tc.v1.common.lib.chart.names.validation" (dict "name" $certName) -}}
-            {{- include "tc.v1.common.lib.metadata.validation" (dict "objectData" $certObjData "caller" "Ingress (certificateIssuer)") -}}
-            {{- include "tc.v1.common.lib.certificate.validation" (dict "rootCtx" $ "objectData" $certObjData) -}}
-
-            {{/* Create the certificate with the certData */}}
-            {{- include "tc.v1.common.class.certificate" (dict "rootCtx" $ "objectData" $certObjData) -}}
-
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

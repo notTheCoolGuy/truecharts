@@ -578,56 +578,6 @@ ingress:
 
 ---
 
-##### `tls[].certificateIssuer`
-
-Define the certificate issuer for this TLS
-
-|            |                                         |
-| ---------- | --------------------------------------- |
-| Key        | `ingress.$name.tls[].certificateIssuer` |
-| Type       | `string`                                |
-| Required   | ❌                                       |
-| Helm `tpl` | ❌                                       |
-| Default    | `""`                                    |
-
-Example
-
-```yaml
-ingress:
-  ingress-name:
-    tls:
-      - hosts:
-          - chart-example.local
-        certificateIssuer: some-issuer
-```
-
----
-
-##### `tls[].clusterIssuer`
-
-Define the cluster issuer for this TLS
-
-|            |                                     |
-| ---------- | ----------------------------------- |
-| Key        | `ingress.$name.tls[].clusterIssuer` |
-| Type       | `string`                            |
-| Required   | ❌                                   |
-| Helm `tpl` | ✅                                   |
-| Default    | `""`                                |
-
-Example
-
-```yaml
-ingress:
-  ingress-name:
-    tls:
-      - hosts:
-          - chart-example.local
-        clusterIssuer: some-issuer
-```
-
----
-
 #### `integrations`
 
 Define the integrations for this ingress
@@ -646,56 +596,6 @@ Example
 ingress:
   ingress-name:
     integrations: {}
-```
-
----
-
-##### `integrations.certManager`
-
-Define the cert-manager integration for this ingress
-
-See more details in [Cert Manager Integration](/truecharts-common/ingress/certmanager)
-
-|            |                                          |
-| ---------- | ---------------------------------------- |
-| Key        | `ingress.$name.integrations.certManager` |
-| Type       | `map`                                    |
-| Required   | ❌                                        |
-| Helm `tpl` | ❌                                        |
-| Default    | `{}`                                     |
-
-Example
-
-```yaml
-ingress:
-  ingress-name:
-    integrations:
-      certManager: {}
-```
-
----
-
-##### `integrations.traefik`
-
-Define the traefik integration for this ingress
-
-See more details in [Traefik Integration](/truecharts-common/ingress/traefik)
-
-|            |                                      |
-| ---------- | ------------------------------------ |
-| Key        | `ingress.$name.integrations.traefik` |
-| Type       | `map`                                |
-| Required   | ❌                                    |
-| Helm `tpl` | ❌                                    |
-| Default    | `{}`                                 |
-
-Example
-
-```yaml
-ingress:
-  ingress-name:
-    integrations:
-      traefik: {}
 ```
 
 ---
@@ -753,20 +653,7 @@ ingress:
       - hosts:
           - chart-example.local
         secretName: chart-example-tls
-        # OR
-        certificateIssuer: ""
     integrations:
-      certManager:
-        enabled: false
-        certificateIssuer: ""
-      traefik:
-        enabled: true
-        entrypoints:
-          - websecure
-        forceTLS: true
-        middlewares:
-          - name: my-middleware
-            namespace: ""
       homepage:
         enabled: false
         name: ""

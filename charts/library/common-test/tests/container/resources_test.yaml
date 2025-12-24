@@ -408,12 +408,6 @@ tests:
         enabled: true
       solr:
         enabled: true
-      cnpg:
-        my-pg:
-          enabled: true
-          user: test-user
-          database: test-db
-          password: test-password
       resources:
         limits:
           "nvidia.com/gpu": "1"
@@ -436,27 +430,7 @@ tests:
                 resources:
                   excludeExtra: true
     asserts:
-      - documentIndex: &clusterDoc 0
-        isKind:
-          of: Cluster
-      - documentIndex: *clusterDoc
-        isAPIVersion:
-          of: postgresql.cnpg.io/v1
-      - documentIndex: *clusterDoc
-        equal:
-          path: metadata.name
-          value: test-release-name-common-test-cnpg-my-pg
-      - documentIndex: *clusterDoc
-        equal:
-          path: spec.resources
-          value:
-            limits:
-              cpu: 1500m
-              memory: 2400Mi
-            requests:
-              cpu: 75m
-              memory: 200Mi
-      - documentIndex: &deploymentDoc 8
+      - documentIndex: &deploymentDoc 7
         isKind:
           of: Deployment
       - documentIndex: *deploymentDoc
@@ -503,7 +477,7 @@ tests:
         isSubset:
           path: spec.template.spec.initContainers[1]
           content:
-            name: test-release-name-common-test-system-cnpg-wait
+            name: test-release-name-common-test-system-mariadb-wait
             resources:
               limits:
                 cpu: 500m
@@ -515,7 +489,7 @@ tests:
         isSubset:
           path: spec.template.spec.initContainers[2]
           content:
-            name: test-release-name-common-test-system-mariadb-wait
+            name: test-release-name-common-test-system-mongodb-wait
             resources:
               limits:
                 cpu: 500m
@@ -527,18 +501,6 @@ tests:
         isSubset:
           path: spec.template.spec.initContainers[3]
           content:
-            name: test-release-name-common-test-system-mongodb-wait
-            resources:
-              limits:
-                cpu: 500m
-                memory: 512Mi
-              requests:
-                cpu: 10m
-                memory: 50Mi
-      - documentIndex: *deploymentDoc
-        isSubset:
-          path: spec.template.spec.initContainers[4]
-          content:
             name: test-release-name-common-test-system-redis-wait
             resources:
               limits:
@@ -549,7 +511,7 @@ tests:
                 memory: 50Mi
       - documentIndex: *deploymentDoc
         isSubset:
-          path: spec.template.spec.initContainers[5]
+          path: spec.template.spec.initContainers[4]
           content:
             name: test-release-name-common-test-system-solr-wait
             resources:

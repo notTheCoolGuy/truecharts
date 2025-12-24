@@ -47,8 +47,6 @@ objectData: The object data to be used to render the Ingress.
     {{- $ingressClassName = "tc-stopped" -}}
   {{- end -}}
 
-  {{- include "tc.v1.common.lib.ingress.integration.certManager" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
-  {{- include "tc.v1.common.lib.ingress.integration.traefik" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
   {{- include "tc.v1.common.lib.ingress.integration.nginx" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
   {{- if ne $ingressClassName "tc-stopped" -}}{{/* If is stopped, dont render homepage annotations */}}
     {{- include "tc.v1.common.lib.ingress.integration.homepage" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
@@ -91,25 +89,12 @@ spec:
                   number: {{ $newSvcData.port }}
           {{- end -}}
     {{- end -}}
-  {{/* If a certificateIssuer is defined in the whole ingress, use that */}}
-  {{- if and $objectData.integrations.certManager $objectData.integrations.certManager.enabled }}
-  tls:
-    {{- range $idx, $h := $objectData.hosts }}
-    - secretName: {{ printf "%s-tls-%d" $objectData.name ($idx | int) }}
-      hosts:
-        - {{ (tpl $h.host $rootCtx) | quote }}
-    {{- end -}}
-  {{/* else if a tls section is defined use the configuration from there */}}
-  {{- else if $objectData.tls }}
+  {{- if $objectData.tls }}
   tls:
     {{- range $idx, $t := $objectData.tls -}}
       {{- $secretName := "" -}}
       {{- if $t.secretName -}}
         {{- $secretName = tpl $t.secretName $rootCtx -}}
-      {{- else if $t.certificateIssuer -}}
-        {{- $secretName = printf "%s-tls-%d" $objectData.name ($idx | int) -}}
-      {{- else if $t.clusterCertificate -}}
-        {{- $secretName = printf "certificate-issuer-%s" (tpl $t.clusterCertificate $rootCtx) -}}
       {{- end }}
     - secretName: {{ $secretName }}
       hosts:

@@ -543,13 +543,11 @@ image:
 
 ## Additional Documentation
 
-- [certificate](/truecharts-common/certificate)
 - [configmap](/truecharts-common/configmap)
 - [container](/truecharts-common/container)
 - [containerOptions](/truecharts-common/containeroptions)
 - [imagePullSecret](/truecharts-common/imagepullsecret)
 - [ingress](/truecharts-common/ingress)
-- [middlewares](/truecharts-common/middlewares)
 - [notes](/truecharts-common/notes)
 - [persistence](/truecharts-common/persistence)
 - [podDisruptionBudget](/truecharts-common/poddisruptionbudget)

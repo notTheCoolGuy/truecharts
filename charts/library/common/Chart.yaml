@@ -28,11 +28,6 @@ maintainers:
     url: https://truecharts.org
 name: common
 sources:
-  - https://ghcr.io/cloudnative-pg/postgis
-  - https://ghcr.io/cloudnative-pg/postgresql
-  - https://ghcr.io/tensorchord/cloudnative-pgvecto.rs
-  - https://ghcr.io/tensorchord/cloudnative-vectorchord
-  - https://ghcr.io/traefik/whoami
   - https://github.com/truecharts/containers/tree/master/apps/alpine
   - https://github.com/truecharts/containers/tree/master/apps/gluetun
   - https://github.com/truecharts/containers/tree/master/apps/netshoot
@@ -43,4 +38,3 @@ sources:
   - https://hub.docker.com/_/
 type: library
 version: 28.29.16
-

@@ -199,9 +199,6 @@ tests:
               - host: code.chart-example.local
                 paths:
                   - path: /
-            integrations:
-              traefik:
-                enabled: false
     asserts:
       - documentIndex: &serviceDocument 1
         isKind:
@@ -258,9 +255,6 @@ tests:
             - host: chart-example.local
               paths:
                 - path: /
-          integrations:
-            traefik:
-              enabled: false
       addons:
         codeserver:
           enabled: true
@@ -270,15 +264,12 @@ tests:
             ports:
               codeserver:
                 port: 30067
-          ingress:
-            enabled: true
-            hosts:
-              - host: code.chart-example.local
-                paths:
-                  - path: /
-            integrations:
-              traefik:
-                enabled: false
+        ingress:
+          enabled: true
+          hosts:
+            - host: code.chart-example.local
+              paths:
+                - path: /
     asserts:
       - documentIndex: &serviceDocument 1
         isKind:

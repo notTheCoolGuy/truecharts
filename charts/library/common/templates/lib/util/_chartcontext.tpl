@@ -75,31 +75,8 @@
       {{- end -}}
     {{- end -}}
 
-    {{- if and .integrations .integrations.traefik -}}
-      {{- $enabled := true -}}
-      {{- if and (hasKey .integrations.traefik "enabled") (kindIs "bool" .integrations.traefik.enabled) -}}
-        {{- $enabled = .integrations.traefik.enabled -}}
-      {{- end -}}
-
-      {{- if $enabled -}}
-        {{- $entrypoints := (.integrations.traefik.entrypoints | default (list "websecure")) -}}
-        {{- if kindIs "slice" $entrypoints -}}
-          {{- if mustHas "websecure" $entrypoints -}}
-            {{- $port = "443" -}}
-          {{- else if mustHas "web" $entrypoints -}}
-            {{- $port = "80" -}}
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-
-    {{- if and .integrations .integrations.certManager .integrations.certManager.enabled -}}
-      {{- $protocol = "https" -}}
-      {{- $port = "443" -}}
-    {{- end -}}
-
     {{- $tls := ((.tls | default list) | mustFirst) -}}
-    {{- if (or $tls.secretName $tls.certificateIssuer $tls.clusterCertificate) -}}
+    {{- if $tls.secretName -}}
       {{- $protocol = "https" -}}
       {{- $port = "443" -}}
     {{- end -}}

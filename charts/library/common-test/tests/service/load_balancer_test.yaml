@@ -53,12 +53,6 @@ tests:
               app.kubernetes.io/instance: test-release-name
               app.kubernetes.io/name: common-test
               pod.name: my-workload
-      - documentIndex: *serviceDoc
-        isNotSubset:
-          path: metadata
-          content:
-            annotations:
-              metallb.io/loadBalancerIPs: "1.2.3.4,5.6.7.8"
 
   - it: should pass with type LoadBalancer and available options set
     set:
@@ -150,8 +144,3 @@ tests:
               app.kubernetes.io/instance: test-release-name
               app.kubernetes.io/name: common-test
               pod.name: my-workload
-      - documentIndex: *serviceDoc
-        isNotSubset:
-          path: metadata.annotations
-          content:
-            metallb.io/loadBalancerIPs: "10.100.200.45"

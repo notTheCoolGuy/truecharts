@@ -165,9 +165,6 @@ tests:
           type: ExternalIP
           useSlice: true
           externalIP: 1.1.1.1
-          integrations:
-            traefik:
-              enabled: true
           ports:
             port-name:
               enabled: true

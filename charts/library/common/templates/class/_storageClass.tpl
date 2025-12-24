@@ -44,7 +44,7 @@ provisioner: {{ $objectData.provisioner }}
 parameters: {{/* TODO: */}}
   {{- range $k, $v := . -}}
     {{- $val := tpl $v $rootCtx }}
-  {{ $k }}: {{ include "tc.v1.common.helper.makeIntOrNoop" $val | quote }}
+  {{ $k }}: {{ include "tc.v1.common.helpers.makeIntOrNoop" $val | quote }}
   {{- end -}}
 {{- end }}
 reclaimPolicy: {{ $objectData.reclaimPolicy | default "Retain" }}

@@ -49,7 +49,7 @@ objectData: The object data to be used to render the container.
               {{- fail (printf "%s - Expected %s [%s] defined in [%s.%s.envFrom] to exist" $caller $source $objectName $key $name) -}}
             {{- end -}}
           {{- range $k, $v := $object.data -}}
-            {{- include "tc.v1.common.helper.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s - %s" $source $objectName) "key" $k "caller" $caller) -}}
+            {{- include "tc.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s - %s" $source $objectName) "key" $k "caller" $caller) -}}
           {{- end -}}
 
           {{- $objectName = (printf "%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}

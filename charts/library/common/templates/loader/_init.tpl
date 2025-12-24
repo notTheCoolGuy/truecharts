@@ -12,18 +12,6 @@
   {{/* Autogenerate redis passwords if needed */}}
   {{- include "tc.v1.common.dependencies.redis.injector" . }}
 
-  {{/* Autogenerate mariadb passwords if needed */}}
-  {{- include "tc.v1.common.dependencies.mariadb.injector" . }}
-
-  {{/* Autogenerate mongodb passwords if needed */}}
-  {{- include "tc.v1.common.dependencies.mongodb.injector" . }}
-
-  {{/* Autogenerate clickhouse passwords if needed */}}
-  {{- include "tc.v1.common.dependencies.clickhouse.injector" . }}
-
-  {{/* Autogenerate solr passwords if needed */}}
-  {{- include "tc.v1.common.dependencies.solr.injector" . }}
-
   {{/* Enable code-server add-on if required */}}
   {{- if .Values.addons.codeserver.enabled }}
     {{- include "tc.v1.common.addon.codeserver" . }}

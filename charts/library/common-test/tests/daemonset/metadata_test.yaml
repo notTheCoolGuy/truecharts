@@ -150,14 +150,6 @@ tests:
           pattern: ^[0-9a-f]{64}$
       - documentIndex: *daemonSetDoc
         matchRegex:
-          path: spec.template.metadata.annotations.checksum/mariadb
-          pattern: ^[0-9a-f]{64}$
-      - documentIndex: *daemonSetDoc
-        matchRegex:
-          path: spec.template.metadata.annotations.checksum/mongodb
-          pattern: ^[0-9a-f]{64}$
-      - documentIndex: *daemonSetDoc
-        matchRegex:
           path: spec.template.metadata.annotations.checksum/persistence
           pattern: ^[0-9a-f]{64}$
       - documentIndex: *daemonSetDoc
@@ -167,10 +159,6 @@ tests:
       - documentIndex: *daemonSetDoc
         matchRegex:
           path: spec.template.metadata.annotations.checksum/services
-          pattern: ^[0-9a-f]{64}$
-      - documentIndex: *daemonSetDoc
-        matchRegex:
-          path: spec.template.metadata.annotations.checksum/solr
           pattern: ^[0-9a-f]{64}$
       - documentIndex: &otherDaemonSetDoc 1
         isKind:

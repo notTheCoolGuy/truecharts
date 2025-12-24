@@ -400,14 +400,6 @@ tests:
       image: *image
       redis:
         enabled: true
-      mongodb:
-        enabled: true
-      mariadb:
-        enabled: true
-      clickhouse:
-        enabled: true
-      solr:
-        enabled: true
       resources:
         limits:
           "nvidia.com/gpu": "1"
@@ -430,7 +422,7 @@ tests:
                 resources:
                   excludeExtra: true
     asserts:
-      - documentIndex: &deploymentDoc 7
+      - documentIndex: &deploymentDoc 1
         isKind:
           of: Deployment
       - documentIndex: *deploymentDoc
@@ -465,55 +457,7 @@ tests:
         isSubset:
           path: spec.template.spec.initContainers[0]
           content:
-            name: test-release-name-common-test-system-clickhouse-wait
-            resources:
-              limits:
-                cpu: 500m
-                memory: 512Mi
-              requests:
-                cpu: 10m
-                memory: 50Mi
-      - documentIndex: *deploymentDoc
-        isSubset:
-          path: spec.template.spec.initContainers[1]
-          content:
-            name: test-release-name-common-test-system-mariadb-wait
-            resources:
-              limits:
-                cpu: 500m
-                memory: 512Mi
-              requests:
-                cpu: 10m
-                memory: 50Mi
-      - documentIndex: *deploymentDoc
-        isSubset:
-          path: spec.template.spec.initContainers[2]
-          content:
-            name: test-release-name-common-test-system-mongodb-wait
-            resources:
-              limits:
-                cpu: 500m
-                memory: 512Mi
-              requests:
-                cpu: 10m
-                memory: 50Mi
-      - documentIndex: *deploymentDoc
-        isSubset:
-          path: spec.template.spec.initContainers[3]
-          content:
             name: test-release-name-common-test-system-redis-wait
-            resources:
-              limits:
-                cpu: 500m
-                memory: 512Mi
-              requests:
-                cpu: 10m
-                memory: 50Mi
-      - documentIndex: *deploymentDoc
-        isSubset:
-          path: spec.template.spec.initContainers[4]
-          content:
-            name: test-release-name-common-test-system-solr-wait
             resources:
               limits:
                 cpu: 500m

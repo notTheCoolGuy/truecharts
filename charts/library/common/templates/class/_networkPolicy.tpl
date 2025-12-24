@@ -19,7 +19,7 @@ Blueprint for the NetworkPolicy object
   {{- end }}
 ---
 kind: NetworkPolicy
-apiVersion: {{ include "tc.v1.common.capabilities.networkpolicy.apiVersion" $ }}
+apiVersion: "networking.k8s.io/v1"
 metadata:
   name: {{ $networkPolicyName }}
   namespace: {{ $.Values.namespace | default $.Values.global.namespace | default $.Release.Namespace }}

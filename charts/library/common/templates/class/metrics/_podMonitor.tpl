@@ -16,7 +16,7 @@
   {{- end }}
 
 ---
-apiVersion: {{ include "tc.v1.common.capabilities.podmonitor.apiVersion" $ }}
+apiVersion: "monitoring.coreos.com/v1"
 kind: PodMonitor
 metadata:
   name: {{ $podmonitorName }}

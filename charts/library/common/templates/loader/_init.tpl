@@ -1,7 +1,7 @@
 {{/* Initialiaze values of the chart */}}
 {{- define "tc.v1.common.loader.init" -}}
 
-  {{- include "tc.v1.common.check.capabilities" . -}}
+  {{- include "tc.v1.common.lib.chart.helm.version" . -}}
 
   {{/* Merge chart values and the common chart defaults */}}
   {{- include "tc.v1.common.values.init" . -}}

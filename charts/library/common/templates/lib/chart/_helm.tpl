@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.check.capabilities" -}}
+{{- define "tc.v1.common.lib.chart.helm.version" -}}
   {{- $helmVersion := semver .Capabilities.HelmVersion.Version -}}
   {{- $helmMinVer := semver "3.14.0" -}}
 

@@ -1,10 +1,10 @@
 {{/* Returns Fixed Env */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.fixedEnv" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.fixedEnv" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.fixedEnv" -}}
+{{- define "asa.v1.common.lib.container.fixedEnv" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $key := .key -}}
@@ -33,7 +33,7 @@ objectData: The object data to be used to render the container.
     {{- end -}}
   {{- end -}}
 
-  {{- $secContext := fromJson (include "tc.v1.common.lib.container.securityContext.calculate" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
+  {{- $secContext := fromJson (include "asa.v1.common.lib.container.securityContext.calculate" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
 
   {{- $fixed := list -}}
   {{- $TZ := $objectData.fixedEnv.TZ | default $rootCtx.Values.TZ -}}
@@ -50,7 +50,7 @@ objectData: The object data to be used to render the container.
   {{- $fixed = mustAppend $fixed (dict "k" "UMASK_SET" "v" $UMASK) -}}
 
   {{- $nvidia := false -}}
-  {{- if eq (include "tc.v1.common.lib.container.resources.hasGPU" (dict "rootCtx" $rootCtx "objectData" $objectData "gpuType" "nvidia.com/gpu")) "true" -}}
+  {{- if eq (include "asa.v1.common.lib.container.resources.hasGPU" (dict "rootCtx" $rootCtx "objectData" $objectData "gpuType" "nvidia.com/gpu")) "true" -}}
     {{- $nvidia = true -}}
   {{- end -}}
 
@@ -93,8 +93,8 @@ objectData: The object data to be used to render the container.
   {{- end -}}
 
   {{- range $env := $fixed -}}
-    {{- include "tc.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.fixedEnv" $key $name) "key" $env.k "caller" $caller) }}
+    {{- include "asa.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.fixedEnv" $key $name) "key" $env.k "caller" $caller) }}
 - name: {{ $env.k | quote }}
-  value: {{ (include "tc.v1.common.helpers.makeIntOrNoop" $env.v) | quote }}
+  value: {{ (include "asa.v1.common.helpers.makeIntOrNoop" $env.v) | quote }}
   {{- end -}}
 {{- end -}}

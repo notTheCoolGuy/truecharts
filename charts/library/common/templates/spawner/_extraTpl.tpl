@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.spawner.extraTpl" -}}
+{{- define "asa.v1.common.spawner.extraTpl" -}}
   {{- range $item := .Values.extraTpl }}
     {{- if not $item -}}
       {{- fail "Extra tpl - Expected non-empty [extraTpl] item" -}}

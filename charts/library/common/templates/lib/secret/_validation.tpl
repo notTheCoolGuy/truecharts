@@ -1,13 +1,13 @@
 {{/* Secret Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.secret.validation" (dict "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.secret.validation" (dict "objectData" $objectData) -}}
 objectData:
   labels: The labels of the secret.
   annotations: The annotations of the secret.
   data: The data of the secret.
 */}}
 
-{{- define "tc.v1.common.lib.secret.validation" -}}
+{{- define "asa.v1.common.lib.secret.validation" -}}
   {{- $objectData := .objectData -}}
 
   {{- if $objectData.stringData -}}

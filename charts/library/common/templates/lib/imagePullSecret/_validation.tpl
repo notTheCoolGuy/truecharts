@@ -1,13 +1,13 @@
 {{/* Configmap Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.imagePullSecret.validation" (dict "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.imagePullSecret.validation" (dict "objectData" $objectData) -}}
 objectData:
   labels: The labels of the imagePullSecret.
   annotations: The annotations of the imagePullSecret.
   data: The data of the imagePullSecret.
 */}}
 
-{{- define "tc.v1.common.lib.imagePullSecret.validation" -}}
+{{- define "asa.v1.common.lib.imagePullSecret.validation" -}}
   {{- $objectData := .objectData -}}
 
   {{- if not $objectData.data -}}

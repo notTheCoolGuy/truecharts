@@ -1,6 +1,6 @@
 {{/* PersistentVolumeClaim Class */}}
 {{/* Call this template:
-{{ include "tc.v1.common.class.pvc" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.class.pvc" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the chart.
 objectData:
@@ -13,7 +13,7 @@ objectData:
   storageClass: The storage class to use. (Absent)
 */}}
 
-{{- define "tc.v1.common.class.pvc" -}}
+{{- define "asa.v1.common.class.pvc" -}}
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
@@ -32,20 +32,20 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ $objectData.name }}
-  namespace: {{ include "tc.v1.common.lib.metadata.namespace" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Persistent Volume Claim") }}
-  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "tc.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
+  namespace: {{ include "asa.v1.common.lib.metadata.namespace" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Persistent Volume Claim") }}
+  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "asa.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "tc.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
+  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "asa.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
   {{- if $pvcRetain -}}
     {{- $_ := set $annotations "\"helm.sh/resource-policy\"" "keep" -}}
   {{- end -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
 spec:
-  {{- include "tc.v1.common.lib.storage.pvc.spec" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
+  {{- include "asa.v1.common.lib.storage.pvc.spec" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 }}
 {{- end -}}

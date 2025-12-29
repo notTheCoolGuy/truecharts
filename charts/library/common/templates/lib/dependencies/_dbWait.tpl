@@ -1,6 +1,6 @@
-{{- define "tc.v1.common.lib.deps.wait" -}}
+{{- define "asa.v1.common.lib.deps.wait" -}}
   {{- if .Values.redis.enabled -}}
-    {{- $container := include "tc.v1.common.lib.deps.wait.redis" $ | fromYaml -}}
+    {{- $container := include "asa.v1.common.lib.deps.wait.redis" $ | fromYaml -}}
     {{- if $container -}}
       {{- range .Values.workload -}}
         {{- if not (hasKey .podSpec "initContainers") -}}
@@ -13,7 +13,7 @@
 
 {{- end -}}
 
-{{- define "tc.v1.common.lib.deps.wait.redis" -}}
+{{- define "asa.v1.common.lib.deps.wait.redis" -}}
 enabled: true
 type: system
 imageSelector: redisClientImage

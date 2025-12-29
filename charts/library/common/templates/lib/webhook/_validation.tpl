@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.webhook.validation" -}}
+{{- define "asa.v1.common.lib.webhook.validation" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
 

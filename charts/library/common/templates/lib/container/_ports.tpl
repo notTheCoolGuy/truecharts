@@ -1,10 +1,10 @@
 {{/* Returns ports list */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.ports" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.ports" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.ports" -}}
+{{- define "asa.v1.common.lib.container.ports" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -82,7 +82,7 @@ objectData: The object data to be used to render the container.
     {{- end -}}
   {{- end -}}
 
-  {{- include "tc.v1.common.lib.container.ports.detectSortingIssues" (dict "portsByName" $portsByName "rootCtx" $rootCtx) -}}
+  {{- include "asa.v1.common.lib.container.ports.detectSortingIssues" (dict "portsByName" $portsByName "rootCtx" $rootCtx) -}}
 
 {{- end -}}
 {{/* Turning hostNetwork on, it creates hostPort automatically and turning it back off does not remove them. Setting hostPort explicitly to null will remove them.
@@ -92,7 +92,7 @@ objectData: The object data to be used to render the container.
 */}}
 
 
-{{- define "tc.v1.common.lib.container.ports.detectSortingIssues" -}}
+{{- define "asa.v1.common.lib.container.ports.detectSortingIssues" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $portsByName := .portsByName -}}
 

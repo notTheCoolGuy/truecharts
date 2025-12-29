@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.util.diagnosticMode" -}}
+{{- define "asa.v1.common.lib.util.diagnosticMode" -}}
   {{- $rootCtx := .rootCtx -}}
 
   {{- $diagMode := "" -}}

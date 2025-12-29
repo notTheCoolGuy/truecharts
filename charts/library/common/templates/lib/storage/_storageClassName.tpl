@@ -1,10 +1,10 @@
 {{/* PVC - Storage Class Name */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.storage.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.storage.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData: The object data of the pvc
 */}}
-{{- define "tc.v1.common.lib.storage.storageClassName" -}}
+{{- define "asa.v1.common.lib.storage.storageClassName" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $caller := .caller -}}

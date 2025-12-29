@@ -1,6 +1,6 @@
 {{/* Secret Class */}}
 {{/* Call this template:
-{{ include "tc.v1.common.class.secret" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.class.secret" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the chart.
 objectData:
@@ -12,7 +12,7 @@ objectData:
   namespace: The namespace of the secret. (Optional)
 */}}
 
-{{- define "tc.v1.common.class.secret" -}}
+{{- define "asa.v1.common.class.secret" -}}
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
@@ -31,14 +31,14 @@ kind: Secret
 type: {{ $secretType }}
 metadata:
   name: {{ $objectData.name }}
-  namespace: {{ include "tc.v1.common.lib.metadata.namespace" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Secret") }}
-  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "tc.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
+  namespace: {{ include "asa.v1.common.lib.metadata.namespace" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Secret") }}
+  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "asa.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "tc.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
+  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "asa.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end -}}

@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.ingress.integration.nginx.auth.authentik" -}}
+{{- define "asa.v1.common.lib.ingress.integration.nginx.auth.authentik" -}}
   {{- $objectData := .objectData -}}
   {{- $auth := .auth -}}
 
@@ -27,7 +27,7 @@
   {{- $_ := set $objectData.annotations "nginx.ingress.kubernetes.io/auth-signin" (printf "https://%s/outpost.goauthentik.io/start?rd=$scheme://$http_host$escaped_request_uri" $auth.externalHost) -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.ingress.integration.nginx.auth.authelia" -}}
+{{- define "asa.v1.common.lib.ingress.integration.nginx.auth.authelia" -}}
   {{- $objectData := .objectData -}}
   {{- $auth := .auth -}}
 

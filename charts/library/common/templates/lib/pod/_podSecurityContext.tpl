@@ -1,10 +1,10 @@
 {{/* Returns Pod Security Context */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.securityContext" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.securityContext" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.pod.securityContext" -}}
+{{- define "asa.v1.common.lib.pod.securityContext" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -20,7 +20,7 @@ objectData: The object data to be used to render the Pod.
     {{- $secContext = mustMergeOverwrite $secContext . -}}
   {{- end -}}
 
-  {{- $gpu := (include "tc.v1.common.lib.pod.resources.hasGPU" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
+  {{- $gpu := (include "asa.v1.common.lib.pod.resources.hasGPU" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
 
   {{- $deviceGroups := (list 5 10 20 24) -}}
   {{- $deviceAdded := false -}}
@@ -29,7 +29,7 @@ objectData: The object data to be used to render the Pod.
 
   {{- range $persistenceName, $persistenceValues := $rootCtx.Values.persistence -}}
     {{- $podSelected := false -}}
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
                   "rootCtx" $rootCtx "objectData" $persistenceValues
                   "name" $persistenceName "caller" "Pod Security Context"
                   "key" "persistence")) -}}
@@ -57,15 +57,15 @@ objectData: The object data to be used to render the Pod.
   {{- end -}}
 
   {{/* Make sure no host "things" are used */}}
-  {{- $hostNet := (eq (include "tc.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData)) "true") -}}
-  {{- $hostPID := (eq (include "tc.v1.common.lib.pod.hostPID" (dict "rootCtx" $rootCtx "objectData" $objectData)) "true") -}}
-  {{- $hostIPC := (eq (include "tc.v1.common.lib.pod.hostIPC" (dict "rootCtx" $rootCtx "objectData" $objectData)) "true") -}}
+  {{- $hostNet := (eq (include "asa.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData)) "true") -}}
+  {{- $hostPID := (eq (include "asa.v1.common.lib.pod.hostPID" (dict "rootCtx" $rootCtx "objectData" $objectData)) "true") -}}
+  {{- $hostIPC := (eq (include "asa.v1.common.lib.pod.hostIPC" (dict "rootCtx" $rootCtx "objectData" $objectData)) "true") -}}
   {{- if or $hostIPC $hostNet $hostPID -}}
     {{- $hostUsers = true -}}
   {{- end }}
 
   {{- range $containerName, $containerValues := $objectData.podSpec.containers -}}
-    {{- $secContContainer := fromJson (include "tc.v1.common.lib.container.securityContext.calculate" (dict "rootCtx" $rootCtx "objectData" $containerValues)) }}
+    {{- $secContContainer := fromJson (include "asa.v1.common.lib.container.securityContext.calculate" (dict "rootCtx" $rootCtx "objectData" $containerValues)) }}
     {{- if or $secContContainer.allowPrivilegeEscalation $secContContainer.privileged $secContContainer.capabilities.add
         (not $secContContainer.readOnlyRootFilesystem) (not $secContContainer.runAsNonRoot)
         (lt ($secContContainer.runAsUser | int) 1) (lt ($secContContainer.runAsGroup | int) 1) -}}
@@ -89,11 +89,11 @@ objectData: The object data to be used to render the Pod.
     {{- fail (printf "Pod - Expected [supplementalGroups] to have only unique values, but got [%s]" (join ", " $secContext.supplementalGroups)) -}}
   {{- end -}}
 
-  {{- $portRange := fromJson (include "tc.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
+  {{- $portRange := fromJson (include "asa.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $objectData)) -}}
   {{/* If a container wants to bind a port <= 1024 change the unprivileged_port_start */}}
   {{- if and $portRange.low (le (int $portRange.low) 1024) -}}
     {{/* That sysctl is not supported when hostNet is enabled */}}
-    {{- if ne (include "tc.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData)) "true" -}}
+    {{- if ne (include "asa.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData)) "true" -}}
       {{- $_ := set $secContext "sysctls" (mustAppend $secContext.sysctls (dict "name" "net.ipv4.ip_unprivileged_port_start" "value" (printf "%v" $portRange.low))) -}}
     {{- end -}}
   {{- end -}}
@@ -113,12 +113,12 @@ objectData: The object data to be used to render the Pod.
   {{- if not (mustHas $secContext.fsGroupChangePolicy $policies) -}}
     {{- fail (printf "Pod - Expected [fsGroupChangePolicy] to be one of [%s], but got [%s]" (join ", " $policies) $secContext.fsGroupChangePolicy) -}}
   {{- end }}
-fsGroup: {{ include "tc.v1.common.helpers.makeIntOrNoop" $secContext.fsGroup }}
+fsGroup: {{ include "asa.v1.common.helpers.makeIntOrNoop" $secContext.fsGroup }}
 fsGroupChangePolicy: {{ $secContext.fsGroupChangePolicy }}
   {{- with $secContext.supplementalGroups }}
 supplementalGroups:
     {{- range . }}
-  - {{ include "tc.v1.common.helpers.makeIntOrNoop" . }}
+  - {{ include "asa.v1.common.helpers.makeIntOrNoop" . }}
     {{- end -}}
   {{- else }}
 supplementalGroups: []

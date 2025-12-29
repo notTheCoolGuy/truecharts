@@ -1,6 +1,6 @@
 {{/* PersistentVolume Class */}}
 {{/* Call this template:
-{{ include "tc.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.class.pv" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the chart.
 objectData:
@@ -13,7 +13,7 @@ objectData:
   size: The size of the PersistentVolume. (Default: 1Gi)
 */}}
 
-{{- define "tc.v1.common.class.pv" -}}
+{{- define "asa.v1.common.class.pv" -}}
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
@@ -34,17 +34,17 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: {{ $objectData.name }}
-  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "tc.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
+  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "asa.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "tc.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
+  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "asa.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
   {{- if $retain -}}
     {{- $_ := set $annotations "\"helm.sh/resource-policy\"" "keep" -}}
   {{- end -}}
   {{- $_ := set $annotations "pv.kubernetes.io/provisioned-by" $objectData.provisioner -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
@@ -54,12 +54,12 @@ spec:
   persistentVolumeReclaimPolicy: {{ $reclaimPolicy }}
   storageClassName: {{ $objectData.name }}
   accessModes:
-    {{- include "tc.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Persistent Volume") | trim | nindent 4 -}}
+    {{- include "asa.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Persistent Volume") | trim | nindent 4 -}}
   {{- if $objectData.mountOptions }}
   mountOptions:
     {{- range $opt := $objectData.mountOptions -}}
       {{- if $opt.value }}
-    - {{ printf "%s=%s" (tpl $opt.key $rootCtx) (tpl (include "tc.v1.common.helpers.makeIntOrNoop" $opt.value) $rootCtx) }}
+    - {{ printf "%s=%s" (tpl $opt.key $rootCtx) (tpl (include "asa.v1.common.helpers.makeIntOrNoop" $opt.value) $rootCtx) }}
       {{- else }}
     - {{ tpl $opt.key $rootCtx }}
       {{- end -}}
@@ -67,9 +67,9 @@ spec:
   {{- end -}}
   {{- if $objectData.static -}}
     {{- if eq "smb" $objectData.static.mode -}}
-      {{- include "tc.v1.common.lib.storage.smbCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
+      {{- include "asa.v1.common.lib.storage.smbCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
     {{- else if eq "nfs" $objectData.static.mode -}}
-      {{- include "tc.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
+      {{- include "asa.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $rootCtx "objectData" $objectData) | trim | nindent 2 -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}

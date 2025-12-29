@@ -1,12 +1,12 @@
 {{/* Persistence Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.persistence.validation" (dict "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.persistence.validation" (dict "objectData" $objectData) -}}
 objectData:
   rootCtx: The root context of the chart.
   objectData: The persistence object.
 */}}
 
-{{- define "tc.v1.common.lib.persistence.validation" -}}
+{{- define "asa.v1.common.lib.persistence.validation" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

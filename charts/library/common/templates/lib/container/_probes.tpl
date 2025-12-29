@@ -1,10 +1,10 @@
 {{/* Returns Probes */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.probes" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.probes" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.probes" -}}
+{{- define "asa.v1.common.lib.container.probes" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -22,7 +22,7 @@ objectData: The object data to be used to render the container.
   {{- end -}}
 
   {{- $probes := $objectData.probes -}}
-  {{- $diagMode := eq (include "tc.v1.common.lib.util.diagnosticMode" (dict "rootCtx" $rootCtx)) "true" -}}
+  {{- $diagMode := eq (include "asa.v1.common.lib.util.diagnosticMode" (dict "rootCtx" $rootCtx)) "true" -}}
   {{- if $diagMode -}}
     {{- $probes = dict -}}
   {{- end -}}
@@ -51,16 +51,16 @@ objectData: The object data to be used to render the container.
       {{- end }}
 {{ $probeName }}Probe:
       {{- if (mustHas $probeType (list "http" "https")) -}}
-        {{- include "tc.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
+        {{- include "asa.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
       {{- else if eq $probeType "tcp" -}}
-        {{- include "tc.v1.common.lib.container.actions.tcpSocket" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
+        {{- include "asa.v1.common.lib.container.actions.tcpSocket" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
       {{- else if eq $probeType "grpc" -}}
-        {{- include "tc.v1.common.lib.container.actions.grpc" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
+        {{- include "asa.v1.common.lib.container.actions.grpc" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
       {{- else if eq $probeType "exec" -}}
-        {{- include "tc.v1.common.lib.container.actions.exec" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
+        {{- include "asa.v1.common.lib.container.actions.exec" (dict "rootCtx" $rootCtx "objectData" $probe "caller" "probes") | trim | nindent 2 -}}
       {{- end -}}
 
-      {{- include "tc.v1.common.lib.container.probeTimeouts" (dict "rootCtx" $rootCtx "objectData" $probe "probeName" $probeName) | trim | nindent 2 -}}
+      {{- include "asa.v1.common.lib.container.probeTimeouts" (dict "rootCtx" $rootCtx "objectData" $probe "probeName" $probeName) | trim | nindent 2 -}}
 
     {{- end -}}
   {{- end -}}
@@ -68,11 +68,11 @@ objectData: The object data to be used to render the container.
 
 {{/* Returns Probe Timeouts */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.probeTimeouts" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.probeTimeouts" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.probeTimeouts" -}}
+{{- define "asa.v1.common.lib.container.probeTimeouts" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $probeName := .probeName -}}

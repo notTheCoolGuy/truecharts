@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.ingress.integration.nginx.themePark" -}}
+{{- define "asa.v1.common.lib.ingress.integration.nginx.themePark" -}}
   {{- $objectData := .objectData -}}
   {{- $theme := .themePark -}}
   {{- if and $theme $theme.enabled (not (kindIs "string" $theme.css)) -}}

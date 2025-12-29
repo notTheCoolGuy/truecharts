@@ -1,10 +1,10 @@
 {{/* Returns Env List */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.envList" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.envList" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.envList" -}}
+{{- define "asa.v1.common.lib.container.envList" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $key := .key -}}
@@ -15,12 +15,12 @@ objectData: The object data to be used to render the container.
     {{- if not $env.name -}}
       {{- fail (printf "%s - Expected non-empty [%s.%s.envList.name]" $caller $key $name) -}}
     {{- end -}} {{/* Empty value is valid */}}
-    {{- include "tc.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.envList" $key $name) "key" $env.name "caller" $caller) -}}
+    {{- include "asa.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.envList" $key $name) "key" $env.name "caller" $caller) -}}
     {{- $value := $env.value -}}
     {{- if kindIs "string" $env.value -}}
       {{- $value = tpl $env.value $rootCtx -}}
     {{- end }}
 - name: {{ $env.name | quote }}
-  value: {{ include "tc.v1.common.helpers.makeIntOrNoop" $value | quote }}
+  value: {{ include "asa.v1.common.helpers.makeIntOrNoop" $value | quote }}
   {{- end -}}
 {{- end -}}

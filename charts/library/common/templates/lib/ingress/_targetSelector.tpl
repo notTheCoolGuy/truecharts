@@ -1,5 +1,5 @@
 {{/* Returns the selected service or fallback to primary */}}
-{{- define "tc.v1.common.lib.ingress.targetSelector" -}}
+{{- define "asa.v1.common.lib.ingress.targetSelector" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -19,7 +19,7 @@
       {{- fail (printf "Ingress - Expected targeted service [%s] to exist" $svcName) -}}
     {{- end -}}
 
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
           "rootCtx" $rootCtx "objectData" $svcData
           "name" $svcName "caller" "Ingress"
           "key" "ingress")) -}}
@@ -32,7 +32,7 @@
     {{/* Find the primary service */}}
     {{- range $name, $service := $rootCtx.Values.service -}}
 
-      {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+      {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
             "rootCtx" $rootCtx "objectData" $service
             "name" $name "caller" "Ingress"
             "key" "ingress")) -}}
@@ -65,7 +65,7 @@
     {{- fail (printf "Ingress - Expected targeted service [%s] to have port [%s]" $svcName $portName) -}}
   {{- end -}}
 
-  {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+  {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
       "rootCtx" $rootCtx "objectData" $portData
       "name" $portName "caller" "Ingress"
       "key" "ingress")) -}}
@@ -74,7 +74,7 @@
     {{- fail (printf "Ingress - Expected targeted service port [%s] to be enabled" $portName) -}}
   {{- end -}}
 
-  {{- $expandedSvcName := include "tc.v1.common.lib.chart.names.fullname" $rootCtx -}}
+  {{- $expandedSvcName := include "asa.v1.common.lib.chart.names.fullname" $rootCtx -}}
   {{- if not $svcData.primary -}}
     {{- $expandedSvcName = printf "%s-%s" $expandedSvcName $svcName -}}
   {{- end -}}

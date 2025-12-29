@@ -1,13 +1,13 @@
 {{/* Metadata Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.podDisruptionBudget.validation" (dict "objectData" $objectData "caller" $caller) -}}
+{{ include "asa.v1.common.lib.podDisruptionBudget.validation" (dict "objectData" $objectData "caller" $caller) -}}
 objectData:
   labels: The labels of the configmap.
   annotations: The annotations of the configmap.
   data: The data of the configmap.
 */}}
 
-{{- define "tc.v1.common.lib.podDisruptionBudget.validation" -}}
+{{- define "asa.v1.common.lib.podDisruptionBudget.validation" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

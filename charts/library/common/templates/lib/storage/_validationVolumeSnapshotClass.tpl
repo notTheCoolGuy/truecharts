@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.volumesnapshotclass.validation" -}}
+{{- define "asa.v1.common.lib.volumesnapshotclass.validation" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

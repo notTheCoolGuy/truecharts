@@ -1,11 +1,11 @@
 {{/* Call this template:
-{{ include "tc.v1.common.lib.workload.components.strategyType" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.workload.components.strategyType" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData:
   replicas: The number of replicas.
   strategy: The deployment strategy to use to replace existing pods with new ones.
 */}}
-{{- define "tc.v1.common.lib.workload.components.strategyType" -}}
+{{- define "asa.v1.common.lib.workload.components.strategyType" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $defaultStrategy := .defaultStrategy -}}
@@ -20,7 +20,7 @@ objectData:
 
   {{- $volsRWO := list -}}
   {{- range $name, $persistence := $rootCtx.Values.persistence }}
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
                 "rootCtx" $rootCtx "objectData" $persistence
                 "name" $name "caller" "Volumes"
                 "key" "persistence")) -}}
@@ -31,11 +31,11 @@ objectData:
     {{- $typesWithAccessMode := (list "pvc") -}}
 
     {{- if (mustHas $type $typesWithAccessMode) -}}
-      {{- $modes := include "tc.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx
+      {{- $modes := include "asa.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx
           "objectData" $persistence "caller" "Volumes") | fromYamlArray
       -}}
 
-      {{- $hasRWO := include "tc.v1.common.lib.pod.volumes.hasRWO" (dict "modes" $modes) -}}
+      {{- $hasRWO := include "asa.v1.common.lib.pod.volumes.hasRWO" (dict "modes" $modes) -}}
       {{- if ne $hasRWO "true" -}}{{- continue -}}{{- end -}}
       {{- $volsRWO = mustAppend $volsRWO $name -}}
     {{- end -}}

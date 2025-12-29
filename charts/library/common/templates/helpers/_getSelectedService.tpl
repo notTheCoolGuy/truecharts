@@ -1,11 +1,11 @@
 {{/* Service - Get Selected Service */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.helpers.getSelectedServiceValues" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.helpers.getSelectedServiceValues" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 objectData: The object data of the service
 rootCtx: The root context of the chart.
 */}}
 
-{{- define "tc.v1.common.lib.helpers.getSelectedServiceValues" -}}
+{{- define "asa.v1.common.lib.helpers.getSelectedServiceValues" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $caller := .caller -}}

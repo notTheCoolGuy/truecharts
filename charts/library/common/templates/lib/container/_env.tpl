@@ -1,10 +1,10 @@
 {{/* Returns Env */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.env" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.env" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.env" -}}
+{{- define "asa.v1.common.lib.container.env" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $key := .key -}}
@@ -12,7 +12,7 @@ objectData: The object data to be used to render the container.
   {{- $caller := .caller -}}
 
   {{- range $k, $v := $objectData.env -}}
-    {{- include "tc.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.env" $key $name) "key" $k "caller" $caller) }}
+    {{- include "asa.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.env" $key $name) "key" $k "caller" $caller) }}
 - name: {{ $k | quote }}
     {{- if not (kindIs "map" $v) -}}
       {{- $value := "" -}}
@@ -22,7 +22,7 @@ objectData: The object data to be used to render the container.
           {{- $value = tpl $v $rootCtx -}}
         {{- end -}}
       {{- end }}
-  value: {{ include "tc.v1.common.helpers.makeIntOrNoop" $value | quote }}
+  value: {{ include "asa.v1.common.helpers.makeIntOrNoop" $value | quote }}
     {{- else if kindIs "map" $v }}
   valueFrom:
       {{- $refs := (list "configMapKeyRef" "secretKeyRef" "fieldRef") -}}
@@ -48,7 +48,7 @@ objectData: The object data to be used to render the container.
 
           {{- $refName = tpl $obj.name $rootCtx -}}
 
-          {{- $expandName := (include "tc.v1.common.lib.util.expandName" (dict
+          {{- $expandName := (include "asa.v1.common.lib.util.expandName" (dict
                           "rootCtx" $rootCtx "objectData" $obj
                           "name" $k "caller" $caller
                           "key" "env")) -}}
@@ -74,7 +74,7 @@ objectData: The object data to be used to render the container.
               {{- fail (printf "%s - Expected in [%s.%s.env] the referenced key [%s] in %s [%s] to be defined" $caller $key $name $obj.key ($item | camelcase | title) $refName) -}}
             {{- end -}}
 
-            {{- $refName = (printf "%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $refName) -}}
+            {{- $refName = (printf "%s-%s" (include "asa.v1.common.lib.chart.names.fullname" $rootCtx) $refName) -}}
           {{- end }}
       name: {{ $refName | quote }}
         {{- end -}}

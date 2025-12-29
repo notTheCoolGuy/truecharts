@@ -1,11 +1,11 @@
 {{/* Service - ipFamily */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.service.ipFamily" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.service.ipFamily" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData: The service object data
 */}}
 
-{{- define "tc.v1.common.lib.service.ipFamily" -}}
+{{- define "asa.v1.common.lib.service.ipFamily" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

@@ -42,7 +42,7 @@ tests:
       - documentIndex: *ingressDoc
         equal:
           path: spec.ingressClassName
-          value: tc-stopped
+          value: asa-stopped
       - documentIndex: *ingressDoc
         isNotSubset:
           path: metadata.annotations

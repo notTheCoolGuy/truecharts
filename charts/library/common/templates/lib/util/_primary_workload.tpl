@@ -1,5 +1,5 @@
 {{/* Returns the primary Workload object */}}
-{{- define "tc.v1.common.lib.util.workload.primary" -}}
+{{- define "asa.v1.common.lib.util.workload.primary" -}}
   {{- $Workloads := .workload -}}
 
   {{- $enabledWorkloads := dict -}}

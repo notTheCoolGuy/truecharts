@@ -1,9 +1,9 @@
 {{/* RBAC Primary Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.rbac.primaryValidation" $ -}}
+{{ include "asa.v1.common.lib.rbac.primaryValidation" $ -}}
 */}}
 
-{{- define "tc.v1.common.lib.rbac.primaryValidation" -}}
+{{- define "asa.v1.common.lib.rbac.primaryValidation" -}}
 
   {{/* Initialize values */}}
   {{- $hasPrimary := false -}}

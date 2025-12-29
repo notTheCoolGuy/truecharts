@@ -1,11 +1,11 @@
 {{/* Service - Ports */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.service.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.service.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData: The object data of the service
 */}}
 
-{{- define "tc.v1.common.lib.service.ports" -}}
+{{- define "asa.v1.common.lib.service.ports" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

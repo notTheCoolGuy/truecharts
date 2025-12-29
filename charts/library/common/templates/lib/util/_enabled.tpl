@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.util.enabled" -}}
+{{- define "asa.v1.common.lib.util.enabled" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $key := .key -}}

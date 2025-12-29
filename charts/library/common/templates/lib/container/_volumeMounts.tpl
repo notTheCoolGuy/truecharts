@@ -1,24 +1,24 @@
 {{/* Returns volumeMount list */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.volumeMount" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.volumeMount" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.volumeMount" -}}
+{{- define "asa.v1.common.lib.container.volumeMount" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
   {{- $volMounts := list -}}
 
   {{- range $persistenceName, $persistenceValues := $rootCtx.Values.persistence -}}
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
                   "rootCtx" $rootCtx "objectData" $persistenceValues
                   "name" $persistenceName "caller" "Volume Mount"
                   "key" "persistence")) -}}
 
     {{/* TLDR: Enabled + Not VCT without STS */}}
     {{- if and (eq $enabled "true") (not (and (eq $persistenceValues.type "vct") (ne $objectData.podType "StatefulSet"))) -}}
-      {{- $volMount := (include "tc.v1.common.lib.container.volumeMount.isSelected" (dict
+      {{- $volMount := (include "asa.v1.common.lib.container.volumeMount.isSelected" (dict
         "rootCtx" $rootCtx "persistenceName" $persistenceName "persistenceValues" $persistenceValues "objectData" $objectData
       )) | fromJson -}}
       {{- if $volMount -}}
@@ -62,7 +62,7 @@ objectData: The object data to be used to render the container.
 
 {{- end -}}
 
-{{- define "tc.v1.common.lib.container.volumeMount.isSelected" -}}
+{{- define "asa.v1.common.lib.container.volumeMount.isSelected" -}}
   {{- $persistenceName := .persistenceName -}}
   {{- $persistenceValues := .persistenceValues -}}
   {{- $objectData := .objectData -}}
@@ -71,7 +71,7 @@ objectData: The object data to be used to render the container.
   {{/* Initialize from the default values */}}
   {{- $volMount := dict -}}
   {{- if eq $persistenceValues.type "vct" -}}
-    {{- $fullname := include "tc.v1.common.lib.chart.names.fullname" $rootCtx -}}
+    {{- $fullname := include "asa.v1.common.lib.chart.names.fullname" $rootCtx -}}
     {{- $persistenceName = printf "%s-%s" $fullname $persistenceName -}}
   {{- end -}}
   {{- $_ := set $volMount "name" $persistenceName -}}

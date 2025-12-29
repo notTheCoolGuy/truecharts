@@ -512,7 +512,7 @@ tests:
       - failedTemplate:
           errorMessage: Ingress - Expected non-empty [tls.secretName]
 
-  - it: should fail with ingressClassName set to tc-stopped
+  - it: should fail with ingressClassName set to asa-stopped
     set:
       service: *service
       ingress:
@@ -520,7 +520,7 @@ tests:
           enabled: true
           primary: true
           hosts: *hosts
-          ingressClassName: tc-stopped
+          ingressClassName: asa-stopped
     asserts:
       - failedTemplate:
-          errorMessage: Ingress - Expected [ingressClassName] to not be [tc-stopped], this is reserved for internal use
+          errorMessage: Ingress - Expected [ingressClassName] to not be [asa-stopped], this is reserved for internal use

@@ -1,6 +1,6 @@
 {{/* Configmap Class */}}
 {{/* Call this template:
-{{ include "tc.v1.common.class.storageclass" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.class.storageclass" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the chart.
 objectData:
@@ -9,7 +9,7 @@ objectData:
   annotations: The annotations of the storageclass.
 */}}
 
-{{- define "tc.v1.common.class.storageclass" -}}
+{{- define "asa.v1.common.class.storageclass" -}}
 
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
@@ -28,14 +28,14 @@ apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: {{ $objectData.name }}
-  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "tc.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
+  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "asa.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "tc.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
+  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "asa.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
   {{- $_ := set $annotations "storageclass.kubernetes.io/is-default-class" ($isDefaultClass | toString) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
@@ -44,7 +44,7 @@ provisioner: {{ $objectData.provisioner }}
 parameters: {{/* TODO: */}}
   {{- range $k, $v := . -}}
     {{- $val := tpl $v $rootCtx }}
-  {{ $k }}: {{ include "tc.v1.common.helpers.makeIntOrNoop" $val | quote }}
+  {{ $k }}: {{ include "asa.v1.common.helpers.makeIntOrNoop" $val | quote }}
   {{- end -}}
 {{- end }}
 reclaimPolicy: {{ $objectData.reclaimPolicy | default "Retain" }}

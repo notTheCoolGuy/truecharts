@@ -1,10 +1,10 @@
 {{/* Returns lifecycle */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.lifecycle" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.lifecycle" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.lifecycle" -}}
+{{- define "asa.v1.common.lib.container.lifecycle" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -25,9 +25,9 @@ objectData: The object data to be used to render the container.
       {{- end }}
 {{ $hook }}:
       {{- if eq $hookValues.type "exec" -}}
-        {{- include "tc.v1.common.lib.container.actions.exec" (dict "rootCtx" $rootCtx "objectData" $hookValues "caller" "lifecycle") | trim | nindent 2 -}}
+        {{- include "asa.v1.common.lib.container.actions.exec" (dict "rootCtx" $rootCtx "objectData" $hookValues "caller" "lifecycle") | trim | nindent 2 -}}
       {{- else if mustHas $hookValues.type (list "http" "https") -}}
-        {{- include "tc.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $rootCtx "objectData" $hookValues "caller" "lifecycle") | trim | nindent 2 -}}
+        {{- include "asa.v1.common.lib.container.actions.httpGet" (dict "rootCtx" $rootCtx "objectData" $hookValues "caller" "lifecycle") | trim | nindent 2 -}}
       {{- end -}}
 
     {{- end -}}

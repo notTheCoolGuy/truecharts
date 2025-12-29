@@ -1,10 +1,10 @@
 {{/* Renders a dict of labels */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $ "labels" $labels) }}
-{{ include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $ "annotations" $annotations) }}
+{{ include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $ "labels" $labels) }}
+{{ include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $ "annotations" $annotations) }}
 */}}
 
-{{- define "tc.v1.common.lib.metadata.render" -}}
+{{- define "asa.v1.common.lib.metadata.render" -}}
   {{- $labels := .labels -}}
   {{- $annotations := .annotations -}}
   {{- $rootCtx := .rootCtx -}}

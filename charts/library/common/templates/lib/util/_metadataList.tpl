@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.util.metaListToDict" -}}
+{{- define "asa.v1.common.lib.util.metaListToDict" -}}
   {{- $objectData := .objectData -}}
   {{- $annoList := $objectData.annotationsList -}}
   {{- $labelList := $objectData.labelsList -}}

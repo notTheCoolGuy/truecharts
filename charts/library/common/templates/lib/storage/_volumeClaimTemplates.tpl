@@ -1,15 +1,15 @@
 {{/* Returns Volume Claim Templates */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.storage.volumeClaimTemplates" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.storage.volumeClaimTemplates" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.storage.volumeClaimTemplates" -}}
+{{- define "asa.v1.common.lib.storage.volumeClaimTemplates" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
   {{- range $name, $vctValues := $rootCtx.Values.persistence -}}
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
                   "rootCtx" $rootCtx "objectData" $vctValues
                   "name" $name "caller" "Volume Claim Templates"
                   "key" "persistence")) -}}
@@ -20,9 +20,9 @@ objectData: The object data to be used to render the Pod.
       {{- $selected := false -}}
       {{- $_ := set $vct "shortName" $name -}}
 
-      {{- include "tc.v1.common.lib.persistence.validation" (dict "objectData" $vct) -}}
-      {{- include "tc.v1.common.lib.chart.names.validation" (dict "name" $vct.shortName) -}}
-      {{- include "tc.v1.common.lib.metadata.validation" (dict "objectData" $vct "caller" "Volume Claim Templates") -}}
+      {{- include "asa.v1.common.lib.persistence.validation" (dict "objectData" $vct) -}}
+      {{- include "asa.v1.common.lib.chart.names.validation" (dict "name" $vct.shortName) -}}
+      {{- include "asa.v1.common.lib.metadata.validation" (dict "objectData" $vct "caller" "Volume Claim Templates") -}}
 
       {{/* If targetSelector is set, check if pod is selected */}}
       {{- if $vct.targetSelector -}}
@@ -51,19 +51,19 @@ objectData: The object data to be used to render the Pod.
         {{- end -}}
         {{- $_ := set $vct "accessModes" $vctAccessModes }}
 - metadata:
-    name: {{ include "tc.v1.common.lib.storage.pvc.name" (dict "rootCtx" $rootCtx "objectName" $vct.shortName "objectData" $vct) }}
+    name: {{ include "asa.v1.common.lib.storage.pvc.name" (dict "rootCtx" $rootCtx "objectName" $vct.shortName "objectData" $vct) }}
     {{- $labels := $vct.labels | default dict -}}
-    {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
+    {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
     labels:
       {{- . | nindent 6 }}
     {{- end -}}
     {{- $annotations := $vct.annotations | default dict -}}
-    {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
+    {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
     annotations:
       {{- . | nindent 6 }}
     {{- end }}
   spec:
-      {{- include "tc.v1.common.lib.storage.pvc.spec" (dict "rootCtx" $rootCtx "objectData" $vct) | trim | nindent 4 }}
+      {{- include "asa.v1.common.lib.storage.pvc.spec" (dict "rootCtx" $rootCtx "objectData" $vct) | trim | nindent 4 }}
       {{- end -}}
     {{- end -}}
   {{- end -}}

@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.ingress.integration.nginx.ipWhitelist" -}}
+{{- define "asa.v1.common.lib.ingress.integration.nginx.ipWhitelist" -}}
   {{- $objectData := .objectData -}}
   {{- $whiteList := .whiteList -}}
 

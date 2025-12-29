@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.webhook.admissionReviewVersions" -}}
+{{- define "asa.v1.common.lib.webhook.admissionReviewVersions" -}}
   {{- $admissionReviewVersions := .admissionReviewVersions -}}
   {{- $rootCtx := .rootCtx }}
 admissionReviewVersions:

@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.util.expandName" -}}
+{{- define "asa.v1.common.lib.util.expandName" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $key := .key -}}

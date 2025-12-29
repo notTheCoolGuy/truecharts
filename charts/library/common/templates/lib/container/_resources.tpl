@@ -1,10 +1,10 @@
 {{/* Returns Resources */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.resources" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.resources" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.resources" -}}
+{{- define "asa.v1.common.lib.container.resources" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -23,7 +23,7 @@ objectData: The object data to be used to render the container.
     {{- $_ := set $objectData.resources "excludeExtra" false -}}
   {{- end -}}
 
-  {{- include "tc.v1.common.lib.container.resources.validation" (dict "resources" $resources) }}
+  {{- include "asa.v1.common.lib.container.resources.validation" (dict "resources" $resources) }}
 requests:
   cpu: {{ $resources.requests.cpu }}
   memory: {{ $resources.requests.memory }}
@@ -55,7 +55,7 @@ limits:
 {{- end -}}
 
 
-{{- define "tc.v1.common.lib.resources.validation.data" -}}
+{{- define "asa.v1.common.lib.resources.validation.data" -}}
   {{/* CPU: https://regex101.com/r/D4HouI/1 */}}
   {{/* MEM: https://regex101.com/r/NNPV2D/1 */}}
   {{- $regex := (dict
@@ -75,13 +75,13 @@ limits:
 
 {{/* Validates resources to match a pattern */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.resources.validation" (dict "resources" $resources) }}
+{{ include "asa.v1.common.lib.container.resources.validation" (dict "resources" $resources) }}
 rootCtx: The root context of the chart.
 resources: The resources object
 */}}
-{{- define "tc.v1.common.lib.container.resources.validation" -}}
+{{- define "asa.v1.common.lib.container.resources.validation" -}}
   {{- $resources := .resources -}}
-  {{- $data := (include "tc.v1.common.lib.resources.validation.data" .) | fromJson -}}
+  {{- $data := (include "asa.v1.common.lib.resources.validation.data" .) | fromJson -}}
   {{- $regex := $data.regex -}}
   {{- $errorMsg := $data.errorMsg -}}
 
@@ -116,7 +116,7 @@ resources: The resources object
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.resources.hasGPU" -}}
+{{- define "asa.v1.common.lib.pod.resources.hasGPU" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $gpuType := .gpuType -}}
@@ -144,7 +144,7 @@ resources: The resources object
       {{- end -}}
 
       {{- range $t := $types -}}
-        {{- if eq (include "tc.v1.common.lib.container.resources.hasGPU" (dict "rootCtx" $rootCtx "objectData" $v "gpuType" $t)) "true" -}}
+        {{- if eq (include "asa.v1.common.lib.container.resources.hasGPU" (dict "rootCtx" $rootCtx "objectData" $v "gpuType" $t)) "true" -}}
           {{- $gpu = true -}}
           {{- break -}}
         {{- end -}}
@@ -156,7 +156,7 @@ resources: The resources object
   {{- $gpu | toString -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.container.resources.hasGPU" -}}
+{{- define "asa.v1.common.lib.container.resources.hasGPU" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $gpuType := .gpuType -}}

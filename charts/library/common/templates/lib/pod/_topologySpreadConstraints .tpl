@@ -1,10 +1,10 @@
 {{/* Returns topologySpreadConstraints  */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.topologySpreadConstraints" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.topologySpreadConstraints" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.pod.topologySpreadConstraints" -}}
+{{- define "asa.v1.common.lib.pod.topologySpreadConstraints" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -27,7 +27,7 @@ objectData: The object data to be used to render the Pod.
   topologyKey: {{ default "kubernetes.io/hostname" $rootCtx.Values.global.fallbackDefaults.topologyKey }}
   labelSelector:
     matchLabels:
-      {{- include "tc.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "objectType" "pod" "objectName" $objectData.shortName) | indent 6 }}
+      {{- include "asa.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $rootCtx "objectType" "pod" "objectName" $objectData.shortName) | indent 6 }}
   nodeAffinityPolicy: Honor
   nodeTaintsPolicy: Honor
   {{- end -}}

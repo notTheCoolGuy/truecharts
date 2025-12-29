@@ -1,11 +1,11 @@
 {{/* Endpoint - Ports */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.endpoint.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.endpoint.ports" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData: The object data of the service
 */}}
 
-{{- define "tc.v1.common.lib.endpoint.ports" -}}
+{{- define "asa.v1.common.lib.endpoint.ports" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

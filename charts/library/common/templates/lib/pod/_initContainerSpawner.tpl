@@ -1,10 +1,10 @@
 {{/* Init Containers */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.initContainerSpawner" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.initContainerSpawner" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.pod.initContainerSpawner" -}}
+{{- define "asa.v1.common.lib.pod.initContainerSpawner" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -18,7 +18,7 @@ objectData: The object data to be used to render the Pod.
   {{- $mergedContainers := $objectData.podSpec.initContainers -}}
 
   {{- range $containerName, $containerValues := $mergedContainers -}}
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
                     "rootCtx" $rootCtx "objectData" $containerValues
                     "name" $containerName "caller" "Init Container"
                     "key" "initContainers")) -}}
@@ -35,7 +35,7 @@ objectData: The object data to be used to render the Pod.
       {{- end -}}
 
       {{- $container := (mustDeepCopy $containerValues) -}}
-      {{- $name := printf "%s-%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $containerType $containerName -}}
+      {{- $name := printf "%s-%s-%s" (include "asa.v1.common.lib.chart.names.fullname" $rootCtx) $containerType $containerName -}}
 
       {{- $_ := set $container "name" $name -}}
       {{- $_ := set $container "shortName" $containerName -}}
@@ -62,22 +62,22 @@ objectData: The object data to be used to render the Pod.
 
   {{- if $rootCtx.Release.IsInstall -}}
     {{- range $container := (get $initContainers "install") -}}
-      {{- include "tc.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
+      {{- include "asa.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
     {{- end -}}
   {{- end -}}
 
   {{- if $rootCtx.Release.IsUpgrade -}}
     {{- range $container := (get $initContainers "upgrade") -}}
-      {{- include "tc.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
+      {{- include "asa.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
     {{- end -}}
   {{- end -}}
 
   {{- range $container := (get $initContainers "system") -}}
-    {{- include "tc.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
+    {{- include "asa.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
   {{- end -}}
 
   {{- range $container := (get $initContainers "init") -}}
-    {{- include "tc.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
+    {{- include "asa.v1.common.lib.pod.container" (dict "rootCtx" $rootCtx "objectData" $container) -}}
   {{- end -}}
 
 {{- end -}}

@@ -1,12 +1,12 @@
 {{/* DaemonSet Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.workload.daemonsetValidation" (dict "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.workload.daemonsetValidation" (dict "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData:
   strategy: The strategy of the object.
   rollingUpdate: The rollingUpdate of the object.
 */}}
-{{- define "tc.v1.common.lib.workload.daemonsetValidation" -}}
+{{- define "asa.v1.common.lib.workload.daemonsetValidation" -}}
   {{- $objectData := .objectData -}}
 
   {{- if $objectData.strategy -}}

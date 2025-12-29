@@ -1,10 +1,10 @@
 {{/* Returns Tolerations */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.tolerations" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.tolerations" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.pod.tolerations" -}}
+{{- define "asa.v1.common.lib.pod.tolerations" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

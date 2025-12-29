@@ -1,5 +1,5 @@
 {{/* Return the name of the primary metrics object */}}
-{{- define "tc.v1.common.lib.util.metrics.primary" -}}
+{{- define "asa.v1.common.lib.util.metrics.primary" -}}
   {{- $metrics := .Values.metrics -}}
 
   {{- $enabledMetrics := dict -}}

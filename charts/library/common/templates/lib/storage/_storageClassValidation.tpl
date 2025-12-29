@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.storageclass.validation" -}}
+{{- define "asa.v1.common.lib.storageclass.validation" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

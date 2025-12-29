@@ -1,23 +1,23 @@
 {{/* Returns Service Account List for rbac */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.rbac.serviceAccount" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.rbac.serviceAccount" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the RBAC.
 */}}
 {{/* Parses service accounts, and checks if RBAC have selected any of them */}}
-{{- define "tc.v1.common.lib.rbac.serviceAccount" -}}
+{{- define "asa.v1.common.lib.rbac.serviceAccount" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
   {{- $serviceAccounts := list -}}
 
   {{- range $name, $serviceAccount := $rootCtx.Values.serviceAccount -}}
-    {{- $saName := include "tc.v1.common.lib.chart.names.fullname" $rootCtx -}}
+    {{- $saName := include "asa.v1.common.lib.chart.names.fullname" $rootCtx -}}
 
     {{- if $serviceAccount.enabled -}}
 
       {{- if not $serviceAccount.primary -}}
-        {{- $saName = (printf "%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $name) -}}
+        {{- $saName = (printf "%s-%s" (include "asa.v1.common.lib.chart.names.fullname" $rootCtx) $name) -}}
       {{- end -}}
 
       {{/* If allServiceAccounts is true */}}

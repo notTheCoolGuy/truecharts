@@ -1,8 +1,8 @@
 {{/* Workload Basic Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.workload.primaryValidation" $ -}}
+{{ include "asa.v1.common.lib.workload.primaryValidation" $ -}}
 */}}
-{{- define "tc.v1.common.lib.workload.primaryValidation" -}}
+{{- define "asa.v1.common.lib.workload.primaryValidation" -}}
 
   {{/* Initialize values */}}
   {{- $hasPrimary := false -}}

@@ -1,9 +1,9 @@
 {{/* Service Account Primary Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.serviceAccount.primaryValidation" $ -}}
+{{ include "asa.v1.common.lib.serviceAccount.primaryValidation" $ -}}
 */}}
 
-{{- define "tc.v1.common.lib.serviceAccount.primaryValidation" -}}
+{{- define "asa.v1.common.lib.serviceAccount.primaryValidation" -}}
 
   {{/* Initialize values */}}
   {{- $hasPrimary := false -}}

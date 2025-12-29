@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.helpers.makeIntOrNoop" -}}
+{{- define "asa.v1.common.helpers.makeIntOrNoop" -}}
   {{- $value := . -}}
 
   {{/*

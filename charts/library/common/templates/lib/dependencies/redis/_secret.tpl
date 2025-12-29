@@ -1,7 +1,7 @@
 {{/*
 This template generates a random password and ensures it persists across updates/edits to the chart
 */}}
-{{- define "tc.v1.common.lib.dependencies.redis.secret" -}}
+{{- define "asa.v1.common.lib.dependencies.redis.secret" -}}
 
 {{- if .Values.redis.enabled -}}
   {{- $dbIndex := .Values.redis.redisDatabase | default "0" -}}

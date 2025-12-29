@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.ingress.integration.homepage" -}}
+{{- define "asa.v1.common.lib.ingress.integration.homepage" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
 
@@ -13,7 +13,7 @@
       {{- $widEnabled = $homepage.widget.enabled -}}
     {{- end -}}
 
-    {{- include "tc.v1.common.lib.ingress.integration.homepage.validation" (dict "objectData" $objectData) -}}
+    {{- include "asa.v1.common.lib.ingress.integration.homepage.validation" (dict "objectData" $objectData) -}}
 
     {{- $name := $homepage.name | default ($rootCtx.Release.Name | camelcase | title) -}}
     {{- $desc := $homepage.description | default $rootCtx.Chart.Description -}}
@@ -39,7 +39,7 @@
       {{- $svc := $objectData.selectedService.name -}}
       {{- $port := $objectData.selectedService.port -}}
       {{- $prot := $objectData.selectedService.protocol -}}
-      {{- $ns := include "tc.v1.common.lib.metadata.namespace" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Ingress") -}}
+      {{- $ns := include "asa.v1.common.lib.metadata.namespace" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "Ingress") -}}
 
       {{- $url = printf "%s://%s.%s.svc:%s" $prot $svc $ns $port -}}
     {{- end -}}
@@ -89,7 +89,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.ingress.integration.homepage.validation" -}}
+{{- define "asa.v1.common.lib.ingress.integration.homepage.validation" -}}
   {{- $objectData := .objectData -}}
 
   {{- $homepage := $objectData.integrations.homepage -}}

@@ -124,16 +124,11 @@ objectData:
       {{- end -}}
     {{- end -}}
 
-    {{- $certOptions := (list "secretName" "certificateIssuer" "clusterCertificate") -}}
-    {{- $optsSet := list -}}
-    {{- range $opt := $certOptions -}}
-      {{- if (get $t $opt) -}}
-        {{- $optsSet = mustAppend $optsSet $opt -}}
-      {{- end -}}
+    {{- if not $t.secretName -}}
+      {{- fail "Ingress - Expected non-empty [tls.secretName]" -}}
     {{- end -}}
-
-    {{- if gt ($optsSet | len) 1 -}}
-      {{- fail (printf "Ingress - Expected only one of [%s] to be set, but got [%s]" (join ", " $certOptions) (join ", " $optsSet)) -}}
+    {{- if and $t.secretName (not (kindIs "string" $t.secretName)) -}}
+      {{- fail (printf "Ingress - Expected [tls.secretName] to be a string, but got [%s]" (kindOf $t.secretName)) -}}
     {{- end -}}
 
   {{- end -}}

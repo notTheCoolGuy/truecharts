@@ -45,9 +45,6 @@ tests:
           labelsList:
             - name: some-label
               value: some-value
-          integrations: &integrations
-            traefik:
-              enabled: false
           hosts: &hosts
             - host: test-host
               paths:
@@ -55,7 +52,6 @@ tests:
         my-ingress2:
           enabled: true
           primary: false
-          integrations: *integrations
           hosts: *hosts
     asserts:
       - documentIndex: &ingressDoc 1

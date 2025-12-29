@@ -5,7 +5,7 @@ title: Static SMB
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/persistence/pvc-vct/static-smb#full-examples) section for complete examples.
+- See the [Full Examples](static-smb.md#full-examples) section for complete examples.
 
 :::
 
@@ -15,7 +15,7 @@ title: Static SMB
 
 :::tip
 
-- See available persistence keys [here](/truecharts-common/persistence).
+- See available persistence keys [here](../index.md).
 - This options apply only when `type: pvc` or `type: vct` and `mode: smb`.
 
 :::

@@ -16,7 +16,7 @@
   {{- end }}
 
 ---
-apiVersion: {{ include "tc.v1.common.capabilities.servicemonitor.apiVersion" $ }}
+apiVersion: "monitoring.coreos.com/v1"
 kind: ServiceMonitor
 metadata:
   name: {{ $servicemonitorName }}

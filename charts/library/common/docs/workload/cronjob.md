@@ -5,8 +5,8 @@ title: CronJob
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/workload/cronjob#full-examples) section for complete examples.
-- See the [Workload](/truecharts-common/workload) documentation for more information
+- See the [Full Examples](cronjob.md#full-examples) section for complete examples.
+- See the [Workload](index.md) documentation for more information
 
 :::
 
@@ -56,7 +56,7 @@ Define the timezone
 | Type       | `string`                       |
 | Required   | ❌                             |
 | Helm `tpl` | ✅                             |
-| Default    | See [here](/truecharts-common#tz) |
+| Default    | See [here](../index.md#tz) |
 
 Example
 

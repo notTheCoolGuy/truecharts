@@ -5,7 +5,7 @@ title: Persistence
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/persistence#full-examples) section for complete examples.
+- See the [Full Examples](index.md#full-examples) section for complete examples.
 
 :::
 
@@ -104,19 +104,19 @@ Define the persistence type
 | Type       | `string`                                                             |
 | Required   | ❌                                                                   |
 | Helm `tpl` | ❌                                                                   |
-| Default    | See default [here](/truecharts-common/fallbackdefaults#persistencetype) |
+| Default    | See default [here](../fallbackDefaults.md#persistencetype) |
 
 Valid Values:
 
-- [`hostPath`](/truecharts-common/persistence/hostpath)
-- [`configmap`](/truecharts-common/configmap)
-- [`secret`](/truecharts-common/secret)
-- [`device`](/truecharts-common/persistence/device)
-- [`pvc`](/truecharts-common/persistence/pvc-vct)
-- [`vct`](/truecharts-common/persistence/pvc-vct)
-- [`nfs`](/truecharts-common/persistence/nfs)
-- [`emptyDir`](/truecharts-common/persistence/emptydir)
-- [`iscsi`](/truecharts-common/persistence/iscsi)
+- [`hostPath`](hostPath.md)
+- [`configmap`](../configmap.md)
+- [`secret`](../secret.md)
+- [`device`](device.md)
+- [`pvc`](pvc-vct/index.md)
+- [`vct`](pvc-vct/index.md)
+- [`nfs`](nfs.md)
+- [`emptyDir`](emptyDir.md)
+- [`iscsi`](iscsi.md)
 
 Example
 
@@ -464,12 +464,12 @@ persistence:
 
 Full examples can be found under each persistence type
 
-- [hostPath](/truecharts-common/persistence/hostpath)
-- [configmap](/truecharts-common/persistence/configmap)
-- [secret](/truecharts-common/persistence/secret)
-- [device](/truecharts-common/persistence/device)
-- [pvc](/truecharts-common/persistence/pvc-vct)
-- [vct](/truecharts-common/persistence/pvc-vct)
-- [nfs](/truecharts-common/persistence/nfs)
-- [emptyDir](/truecharts-common/persistence/emptydir)
-- [iscsi](/truecharts-common/persistence/iscsi)
+- [hostPath](hostPath.md)
+- [configmap](configmap.md)
+- [secret](secret.md)
+- [device](device.md)
+- [pvc](pvc-vct/index.md)
+- [vct](pvc-vct/index.md)
+- [nfs](nfs.md)
+- [emptyDir](emptyDir.md)
+- [iscsi](iscsi.md)

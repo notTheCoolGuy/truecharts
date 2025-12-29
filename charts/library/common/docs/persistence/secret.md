@@ -5,7 +5,7 @@ title: Secret
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/persistence/secret#full-examples) section for complete examples.
+- See the [Full Examples](secret.md#full-examples) section for complete examples.
 
 :::
 
@@ -15,7 +15,7 @@ title: Secret
 
 :::tip
 
-- See available persistence keys [here](/truecharts-common/persistence).
+- See available persistence keys [here](index.md).
 - This options apply only when `type: secret`.
 
 :::

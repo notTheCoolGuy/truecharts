@@ -29,8 +29,6 @@ tests:
               paths:
                 - path: /test-path
           integrations: &integrations
-            traefik:
-              enabled: false
             homepage:
               enabled: true
     asserts:

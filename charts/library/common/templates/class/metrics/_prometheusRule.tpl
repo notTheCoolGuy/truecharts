@@ -16,7 +16,7 @@
   {{- end }}
 
 ---
-apiVersion: {{ include "tc.v1.common.capabilities.prometheusrule.apiVersion" $ }}
+apiVersion: "monitoring.coreos.com/v1"
 kind: PrometheusRule
 metadata:
   name: {{ $prometheusruleName }}

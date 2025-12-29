@@ -5,15 +5,15 @@ title: Env
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/container/env#full-examples) section for complete examples.
+- See the [Full Examples](env.md#full-examples) section for complete examples.
 
 :::
 
 :::tip
 
 Variable names will be scanned for duplicates across all
-[secrets](/truecharts-common/secret), [configmaps](/truecharts-common/configmap),
-[env](/truecharts-common/container/env), [envList](/truecharts-common/container/envlist) and [fixedEnv](/truecharts-common/container/fixedenv)
+[secrets](../secret.md), [configmaps](../configmap.md),
+[env](env.md), [envList](envList.md) and [fixedEnv](fixedEnv.md)
 and will throw an error if it finds any.
 
 :::
@@ -110,7 +110,7 @@ Define the configMap name
 :::note
 
 This will be automatically expanded to `fullname-secret-name`.
-You can opt out of this by setting [`expandObjectName`](/truecharts-common/container/env#envkeyconfigmapkeyrefexpandobjectname) to `false`
+You can opt out of this by setting [`expandObjectName`](env.md#envkeyconfigmapkeyrefexpandobjectname) to `false`
 
 :::
 
@@ -228,7 +228,7 @@ Define the secret name
 :::note
 
 This will be automatically expanded to `fullname-secret-name`.
-You can opt out of this by setting [`expandObjectName`](/truecharts-common/container/env#envkeysecretkeyrefexpandobjectname) to `false`
+You can opt out of this by setting [`expandObjectName`](env.md#envkeysecretkeyrefexpandobjectname) to `false`
 
 :::
 

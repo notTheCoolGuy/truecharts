@@ -5,7 +5,7 @@ title: Device
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/persistence/device#full-examples) section for complete examples.
+- See the [Full Examples](device.md#full-examples) section for complete examples.
 
 :::
 
@@ -15,7 +15,7 @@ title: Device
 
 :::tip
 
-- See available persistence keys [here](/truecharts-common/persistence).
+- See available persistence keys [here](index.md).
 - This options apply only when `type: device`.
 
 :::

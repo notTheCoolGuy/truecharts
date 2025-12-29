@@ -1,4 +1,0 @@
-mealie:
-  api:
-    general:
-      base_url: http://localhost:10018

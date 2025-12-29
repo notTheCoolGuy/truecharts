@@ -59,7 +59,7 @@ spec:
   mountOptions:
     {{- range $opt := $objectData.mountOptions -}}
       {{- if $opt.value }}
-    - {{ printf "%s=%s" (tpl $opt.key $rootCtx) (tpl (include "tc.v1.common.helper.makeIntOrNoop" $opt.value) $rootCtx) }}
+    - {{ printf "%s=%s" (tpl $opt.key $rootCtx) (tpl (include "tc.v1.common.helpers.makeIntOrNoop" $opt.value) $rootCtx) }}
       {{- else }}
     - {{ tpl $opt.key $rootCtx }}
       {{- end -}}

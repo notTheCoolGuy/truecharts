@@ -5,8 +5,8 @@ title: LoadBalancer
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/service/loadbalancer#full-examples) section for complete examples.
-- See the [Service](/truecharts-common/service) documentation for more information
+- See the [Full Examples](LoadBalancer.md#full-examples) section for complete examples.
+- See the [Service](index.md) documentation for more information
 
 :::
 
@@ -16,36 +16,16 @@ title: LoadBalancer
 
 :::tip
 
-- See available service keys [here](/truecharts-common/service).
+- See available service keys [here](index.md).
 - This options apply only when `type: LoadBalancer`.
 
 :::
 
 ---
 
-## `sharedKey`
-
-Sets the shared key in `metallb.io/allow-shared-ip` **MetalLB** Annotation
-
-|            |                           |
-| ---------- | ------------------------- |
-| Key        | `service.$name.sharedKey` |
-| Type       | `string`                  |
-| Required   | ❌                        |
-| Helm `tpl` | ✅                        |
-| Default    | `$FullName`               |
-
-Example
-
-```yaml
-service:
-  some-service:
-    sharedKey: custom-shared-key
-```
-
 ## `loadBalancerIP`
 
-Define the load balancer IP, sets the `metallb.io/loadBalancerIPs` **MetalLB** annotation. Mutually exclusive with `loadBalancerIPs`
+Define the load balancer IP. Mutually exclusive with `loadBalancerIPs`
 
 |            |                                |
 | ---------- | ------------------------------ |
@@ -65,7 +45,7 @@ service:
 
 ## `loadBalancerIPs`
 
-Define the load balancer IPs, sets the `metallb.io/loadBalancerIPs` **MetalLB** annotation. Mutually exclusive with `loadBalancerIP`
+Define the load balancer IPs. Mutually exclusive with `loadBalancerIP`
 
 |            |                                 |
 | ---------- | ------------------------------- |
@@ -123,7 +103,6 @@ service:
     loadBalancerSourceRanges:
       - 10.100.100.0/24
     clusterIP: 172.16.20.233
-    sharedKey: custom-shared-key
     publishNotReadyAddresses: true
     ipFamilyPolicy: SingleStack
     ipFamilies:

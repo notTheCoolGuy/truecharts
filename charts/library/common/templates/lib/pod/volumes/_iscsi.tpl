@@ -55,7 +55,7 @@ objectData: The object data to be used to render the volume.
       {{- end -}}
     {{- end }}
     iqn: {{ tpl $objectData.iscsi.iqn $rootCtx }}
-    lun: {{ include "tc.v1.common.helper.makeIntOrNoop" $lun }}
+    lun: {{ include "tc.v1.common.helpers.makeIntOrNoop" $lun }}
     {{- with $objectData.iscsi.iscsiInterface }}
     iscsiInterface: {{ tpl . $rootCtx }}
     {{- end -}}

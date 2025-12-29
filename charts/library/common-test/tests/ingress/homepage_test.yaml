@@ -39,8 +39,6 @@ tests:
           enabled: true
           primary: true
           integrations:
-            traefik: &traefik
-              enabled: false
             homepage:
               enabled: true
           hosts:
@@ -50,7 +48,6 @@ tests:
         my-ingress2:
           enabled: true
           integrations:
-            traefik: *traefik
             homepage:
               enabled: true
               name: "{{ .Values.k1 }}"
@@ -82,7 +79,6 @@ tests:
           targetSelector:
             my-service2: port-2
           integrations:
-            traefik: *traefik
             homepage:
               enabled: true
               widget:
@@ -95,7 +91,6 @@ tests:
           enabled: true
           hosts: *hosts
           integrations:
-            traefik: *traefik
             homepage:
               enabled: true
               widget:
@@ -115,7 +110,6 @@ tests:
         my-ingress5:
           enabled: true
           integrations:
-            traefik: *traefik
             homepage:
               enabled: true
           hosts:
@@ -252,8 +246,6 @@ tests:
           enabled: true
           primary: true
           integrations:
-            traefik:
-              enabled: false
             homepage:
               enabled: true
               podSelector: main
@@ -270,8 +262,6 @@ tests:
           enabled: true
           primary: true
           integrations:
-            traefik:
-              enabled: false
             homepage:
               enabled: true
               widget:
@@ -289,8 +279,6 @@ tests:
           enabled: true
           primary: true
           integrations:
-            traefik:
-              enabled: false
             homepage:
               enabled: true
               widget:
@@ -308,8 +296,6 @@ tests:
           enabled: true
           primary: true
           integrations:
-            traefik:
-              enabled: false
             homepage:
               enabled: true
               widget:

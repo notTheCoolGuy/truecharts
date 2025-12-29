@@ -93,8 +93,8 @@ objectData: The object data to be used to render the container.
   {{- end -}}
 
   {{- range $env := $fixed -}}
-    {{- include "tc.v1.common.helper.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.fixedEnv" $key $name) "key" $env.k "caller" $caller) }}
+    {{- include "tc.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.fixedEnv" $key $name) "key" $env.k "caller" $caller) }}
 - name: {{ $env.k | quote }}
-  value: {{ (include "tc.v1.common.helper.makeIntOrNoop" $env.v) | quote }}
+  value: {{ (include "tc.v1.common.helpers.makeIntOrNoop" $env.v) | quote }}
   {{- end -}}
 {{- end -}}

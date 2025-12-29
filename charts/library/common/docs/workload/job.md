@@ -5,8 +5,8 @@ title: Job
 :::note
 
 - Examples under each key are only to be used as a placement guide
-- See the [Full Examples](/truecharts-common/workload/job#full-examples) section for complete examples.
-- See the [Workload](/truecharts-common/workload) documentation for more information
+- See the [Full Examples](job.md#full-examples) section for complete examples.
+- See the [Workload](index.md) documentation for more information
 
 :::
 

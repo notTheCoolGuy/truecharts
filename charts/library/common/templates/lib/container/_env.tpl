@@ -12,7 +12,7 @@ objectData: The object data to be used to render the container.
   {{- $caller := .caller -}}
 
   {{- range $k, $v := $objectData.env -}}
-    {{- include "tc.v1.common.helper.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.env" $key $name) "key" $k "caller" $caller) }}
+    {{- include "tc.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s.%s.env" $key $name) "key" $k "caller" $caller) }}
 - name: {{ $k | quote }}
     {{- if not (kindIs "map" $v) -}}
       {{- $value := "" -}}
@@ -22,7 +22,7 @@ objectData: The object data to be used to render the container.
           {{- $value = tpl $v $rootCtx -}}
         {{- end -}}
       {{- end }}
-  value: {{ include "tc.v1.common.helper.makeIntOrNoop" $value | quote }}
+  value: {{ include "tc.v1.common.helpers.makeIntOrNoop" $value | quote }}
     {{- else if kindIs "map" $v }}
   valueFrom:
       {{- $refs := (list "configMapKeyRef" "secretKeyRef" "fieldRef") -}}

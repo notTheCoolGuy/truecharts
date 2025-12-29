@@ -1,10 +1,10 @@
 {{/* Returns projected Volume */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.volume.projected" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.volume.projected" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the volume.
 */}}
-{{- define "tc.v1.common.lib.pod.volume.projected" -}}
+{{- define "asa.v1.common.lib.pod.volume.projected" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -40,20 +40,20 @@ objectData: The object data to be used to render the volume.
       {{- $v := (get $source $k) -}}
 
       {{- if eq $k "serviceAccountToken" }}
-        {{- include "tc.v1.common.lib.pod.volume.projected.serviceAccountToken" (dict "rootCtx" $rootCtx "source" $v) | nindent 6 }}
+        {{- include "asa.v1.common.lib.pod.volume.projected.serviceAccountToken" (dict "rootCtx" $rootCtx "source" $v) | nindent 6 }}
       {{- else if or (eq $k "secret") (eq $k "configMap") }}
-        {{- include "tc.v1.common.lib.pod.volume.projected.cm-secret" (dict "rootCtx" $rootCtx "source" $v "type" $k) | nindent 6 }}
+        {{- include "asa.v1.common.lib.pod.volume.projected.cm-secret" (dict "rootCtx" $rootCtx "source" $v "type" $k) | nindent 6 }}
       {{- else if eq $k "downwardAPI" }}
-        {{- include "tc.v1.common.lib.pod.volume.projected.downwardAPI" (dict "rootCtx" $rootCtx "source" $v) | nindent 6 }}
+        {{- include "asa.v1.common.lib.pod.volume.projected.downwardAPI" (dict "rootCtx" $rootCtx "source" $v) | nindent 6 }}
       {{- else if eq $k "clusterTrustBundle" }}
-        {{- include "tc.v1.common.lib.pod.volume.projected.clusterTrustBundle" (dict "rootCtx" $rootCtx "source" $v) | nindent 6 }}
+        {{- include "asa.v1.common.lib.pod.volume.projected.clusterTrustBundle" (dict "rootCtx" $rootCtx "source" $v) | nindent 6 }}
       {{- else -}}
         {{- fail (printf "Persistence - Invalid source type [%s] for projected. Valid sources are [%s]" $k (join ", " $allowedSources)) -}}
       {{- end -}}
     {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.volume.projected.serviceAccountToken" -}}
+{{- define "asa.v1.common.lib.pod.volume.projected.serviceAccountToken" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $source := .source -}}
 
@@ -76,7 +76,7 @@ objectData: The object data to be used to render the volume.
     path: {{ tpl $source.path $rootCtx }}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.volume.projected.downwardAPI" -}}
+{{- define "asa.v1.common.lib.pod.volume.projected.downwardAPI" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $source := .source -}}
 
@@ -123,7 +123,7 @@ objectData: The object data to be used to render the volume.
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.volume.projected.cm-secret" -}}
+{{- define "asa.v1.common.lib.pod.volume.projected.cm-secret" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $source := .source -}}
   {{- $type := .type -}}
@@ -142,7 +142,7 @@ objectData: The object data to be used to render the volume.
 
   {{- $objectName := tpl $source.objectName $rootCtx -}}
 
-  {{- $expandName := (include "tc.v1.common.lib.util.expandName" (dict
+  {{- $expandName := (include "asa.v1.common.lib.util.expandName" (dict
                   "rootCtx" $rootCtx "objectData" $source
                   "name" $source.objectName "caller" "Persistence - Projected"
                   "key" "persistence")) -}}
@@ -153,7 +153,7 @@ objectData: The object data to be used to render the volume.
       {{- fail (printf "Persistence - Expected %s [%s] defined in [objectName] to exist" $ltype $objectName) -}}
     {{- end -}}
 
-    {{- $objectName = (printf "%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
+    {{- $objectName = (printf "%s-%s" (include "asa.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
   {{- end }}
 - {{ $type }}:
     name: {{ $objectName }}
@@ -173,7 +173,7 @@ objectData: The object data to be used to render the volume.
     {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.volume.projected.clusterTrustBundle" -}}
+{{- define "asa.v1.common.lib.pod.volume.projected.clusterTrustBundle" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $source := .source -}}
 

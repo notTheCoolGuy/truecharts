@@ -1,18 +1,18 @@
 {{/* Service Spawner */}}
 {{/* Call this template:
-{{ include "tc.v1.common.spawner.service" $ -}}
+{{ include "asa.v1.common.spawner.service" $ -}}
 */}}
 
-{{- define "tc.v1.common.spawner.service" -}}
-  {{- $fullname := include "tc.v1.common.lib.chart.names.fullname" $ -}}
+{{- define "asa.v1.common.spawner.service" -}}
+  {{- $fullname := include "asa.v1.common.lib.chart.names.fullname" $ -}}
 
   {{/* Primary validation for enabled service. */}}
-  {{- include "tc.v1.common.lib.service.primaryValidation" $ -}}
+  {{- include "asa.v1.common.lib.service.primaryValidation" $ -}}
   {{/* Initialize with existing URLs or an empty list */}}
   {{- $allUrls := $.Values.chartContext.internalUrls | default list -}}
 
   {{- range $name, $service := .Values.service -}}
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
                     "rootCtx" $ "objectData" $service
                     "name" $name "caller" "Service"
                     "key" "service")) -}}
@@ -21,12 +21,12 @@
 
     {{/* Create a copy of the configmap */}}
     {{- $objectData := (mustDeepCopy $service) -}}
-    {{- $namespace := (include "tc.v1.common.lib.metadata.namespace" (dict "rootCtx" $ "objectData" $service "caller" "Service")) -}}
+    {{- $namespace := (include "asa.v1.common.lib.metadata.namespace" (dict "rootCtx" $ "objectData" $service "caller" "Service")) -}}
 
     {{/* Init object name */}}
     {{- $objectName := $name -}}
 
-    {{- $expandName := (include "tc.v1.common.lib.util.expandName" (dict
+    {{- $expandName := (include "asa.v1.common.lib.util.expandName" (dict
                     "rootCtx" $ "objectData" $objectData
                     "name" $name "caller" "Service"
                     "key" "service")) -}}
@@ -41,12 +41,12 @@
       {{- $objectName = (printf "%s-%s" $fullname $name) -}}
     {{- end -}}
 
-    {{- include "tc.v1.common.lib.util.metaListToDict" (dict "objectData" $objectData) -}}
+    {{- include "asa.v1.common.lib.util.metaListToDict" (dict "objectData" $objectData) -}}
 
     {{/* Perform validations */}}
-    {{- include "tc.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
-    {{- include "tc.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Service") -}}
-    {{- include "tc.v1.common.lib.service.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
+    {{- include "asa.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
+    {{- include "asa.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Service") -}}
+    {{- include "asa.v1.common.lib.service.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
     {{/* Set the name of the service */}}
     {{- $_ := set $objectData "name" $objectName -}}
@@ -54,7 +54,7 @@
 
     {{/* Now iterate over the ports in the service */}}
     {{- range $port := $service.ports -}}
-      {{- $enabledP := (include "tc.v1.common.lib.util.enabled" (dict
+      {{- $enabledP := (include "asa.v1.common.lib.util.enabled" (dict
                     "rootCtx" $ "objectData" $port
                     "name" $name "caller" "service"
                     "key" "port")) -}}
@@ -65,7 +65,7 @@
     {{- end -}}
 
     {{/* Call class to create the object */}}
-    {{- include "tc.v1.common.class.service" (dict "rootCtx" $ "objectData" $objectData) -}}
+    {{- include "asa.v1.common.class.service" (dict "rootCtx" $ "objectData" $objectData) -}}
   {{- end -}}
 
   {{/* Update internalUrls after the loop */}}

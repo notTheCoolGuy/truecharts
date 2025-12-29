@@ -1,10 +1,10 @@
 {{/* Returns Host Name */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.hostname" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.hostname" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.pod.hostname" -}}
+{{- define "asa.v1.common.lib.pod.hostname" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -15,7 +15,7 @@ objectData: The object data to be used to render the Pod.
   {{- end -}}
 
   {{- if $hostname -}}
-    {{- include "tc.v1.common.lib.chart.names.validation" (dict "name" $hostname) -}}
+    {{- include "asa.v1.common.lib.chart.names.validation" (dict "name" $hostname) -}}
   {{- end -}}
 
   {{- $hostname -}}

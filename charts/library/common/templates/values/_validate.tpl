@@ -2,9 +2,9 @@
 {{/* This usually can happen after merging values from an include that did not render correcly */}}
 {{/* Any object will be passed to "toYaml" */}}
 {{/* Call this template:
-{{ include "tc.v1.common.values.validate" . }}
+{{ include "asa.v1.common.values.validate" . }}
 */}}
-{{- define "tc.v1.common.values.validate" -}}
+{{- define "asa.v1.common.values.validate" -}}
   {{- $allValues := (toYaml .) -}}
 
   {{- if contains "error converting YAML to JSON" $allValues -}}

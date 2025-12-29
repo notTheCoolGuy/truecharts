@@ -1,5 +1,5 @@
 {{/* Returns the primary Workload object */}}
-{{- define "tc.v1.common.lib.util.chartcontext" -}}
+{{- define "asa.v1.common.lib.util.chartcontext" -}}
 
   {{/* Prepare an empty object so it the chartcontext.data util behave properly */}}
   {{- $objectData := (dict
@@ -8,7 +8,7 @@
     "path" ""
   ) -}}
 
-  {{- $context := (include "tc.v1.common.lib.util.chartcontext.data" (dict "rootCtx" $ "objectData" $objectData) | fromYaml) -}}
+  {{- $context := (include "asa.v1.common.lib.util.chartcontext.data" (dict "rootCtx" $ "objectData" $objectData) | fromYaml) -}}
 
   {{- $_ := set $.Values "chartContext" $context -}}
 
@@ -21,7 +21,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.util.chartcontext.data" -}}
+{{- define "asa.v1.common.lib.util.chartcontext.data" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -44,7 +44,7 @@
   {{/* TODO: Find ways to implement CIDR detection */}}
 
   {{/* If there is ingress, get data from the primary */}}
-  {{- $primaryIngressName := include "tc.v1.common.lib.util.ingress.primary" (dict "rootCtx" $rootCtx) -}}
+  {{- $primaryIngressName := include "asa.v1.common.lib.util.ingress.primary" (dict "rootCtx" $rootCtx) -}}
   {{- $selectedIngress := (get $rootCtx.Values.ingress $primaryIngressName) -}}
 
   {{- with $objectData.targetSelector -}}
@@ -84,7 +84,7 @@
 
   {{/* If there is no ingress, we have to use service */}}
   {{- if not $selectedIngress -}}
-    {{- $primaryServiceName := include "tc.v1.common.lib.util.service.primary" (dict "rootCtx" $rootCtx) -}}
+    {{- $primaryServiceName := include "asa.v1.common.lib.util.service.primary" (dict "rootCtx" $rootCtx) -}}
     {{- $selectedService := (get $rootCtx.Values.service $primaryServiceName) -}}
 
     {{- with $objectData.targetSelector -}}
@@ -98,7 +98,7 @@
 
     {{- $primaryPort := dict -}}
     {{- if $selectedService -}}
-      {{- $primaryPortName := include "tc.v1.common.lib.util.service.ports.primary" (dict "rootCtx" $rootCtx "svcValues" $selectedService) -}}
+      {{- $primaryPortName := include "asa.v1.common.lib.util.service.ports.primary" (dict "rootCtx" $rootCtx "svcValues" $selectedService) -}}
       {{- $selectedPort := dict -}}
       {{- if $selectedService.ports -}} {{/* eg, ExternalName does not require ports */}}
         {{- $selectedPort = (get $selectedService.ports $primaryPortName) -}}

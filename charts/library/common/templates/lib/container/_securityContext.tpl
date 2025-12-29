@@ -1,15 +1,15 @@
 {{/* Returns Container Security Context */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.securityContext" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.securityContext" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.securityContext" -}}
+{{- define "asa.v1.common.lib.container.securityContext" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
   {{/* Initialize from the "global" options */}}
-  {{- $secContext := fromJson (include "tc.v1.common.lib.container.securityContext.calculate" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
+  {{- $secContext := fromJson (include "asa.v1.common.lib.container.securityContext.calculate" (dict "rootCtx" $rootCtx "objectData" $objectData)) }}
 runAsNonRoot: {{ $secContext.runAsNonRoot }}
 runAsUser: {{ $secContext.runAsUser }}
 runAsGroup: {{ $secContext.runAsGroup }}
@@ -42,23 +42,23 @@ capabilities:
 
 {{/* Calculates Container Security Context */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.securityContext.calculate" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.securityContext.calculate" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.securityContext.calculate" -}}
+{{- define "asa.v1.common.lib.container.securityContext.calculate" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
   {{- $mustPrivileged := false -}}
   {{- range $persistenceName, $persistenceValues := $rootCtx.Values.persistence -}}
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
                   "rootCtx" $rootCtx "objectData" $persistenceValues
                   "name" $persistenceName "caller" "Security Context"
                   "key" "persistence")) -}}
     {{- if (eq $enabled "true") -}}
       {{- if eq $persistenceValues.type "device" -}}
-        {{- $volume := (fromJson (include "tc.v1.common.lib.container.volumeMount.isSelected" (dict "persistenceName" $persistenceName "persistenceValues" $persistenceValues "objectData" $objectData "key" "persistence"))) -}}
+        {{- $volume := (fromJson (include "asa.v1.common.lib.container.volumeMount.isSelected" (dict "persistenceName" $persistenceName "persistenceValues" $persistenceValues "objectData" $objectData "key" "persistence"))) -}}
         {{- if $volume -}} {{/* If a volume is returned, it means that the container has an assigned device */}}
           {{- $mustPrivileged = true -}}
         {{- end -}}
@@ -131,7 +131,7 @@ objectData: The object data to be used to render the container.
   {{- end -}}
 
   {{- $tempObjectData := (dict "shortName" $objectData.podShortName "primary" $objectData.podPrimary) -}}
-  {{- $portRange := fromJson (include "tc.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $tempObjectData)) -}}
+  {{- $portRange := fromJson (include "asa.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $rootCtx "objectData" $tempObjectData)) -}}
   {{- if and $portRange.low (le (int $portRange.low) 1024) -}} {{/* If a container wants to bind a port <= 1024 add NET_BIND_SERVICE */}}
     {{- $addCap := $secContext.capabilities.add -}}
     {{- if not (mustHas "NET_BIND_SERIVCE" $addCap) -}}

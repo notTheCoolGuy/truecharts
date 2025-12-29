@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.storage.iscsi.chap" -}}
+{{- define "asa.v1.common.lib.storage.iscsi.chap" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := dict -}}

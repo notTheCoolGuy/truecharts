@@ -1,10 +1,10 @@
 {{/* Returns Node Selector */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.nodeSelector" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.nodeSelector" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.pod.nodeSelector" -}}
+{{- define "asa.v1.common.lib.pod.nodeSelector" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -20,7 +20,7 @@ objectData: The object data to be used to render the Pod.
     {{- $selectors = . -}}
   {{- end -}}
 
-  {{- if and (include "tc.v1.common.lib.util.stopAll" $rootCtx) (eq $objectData.type "DaemonSet") }}
+  {{- if and (include "asa.v1.common.lib.util.stopAll" $rootCtx) (eq $objectData.type "DaemonSet") }}
 "non-existing": "true"
   {{ else }}
     {{- range $k, $v := $selectors -}}

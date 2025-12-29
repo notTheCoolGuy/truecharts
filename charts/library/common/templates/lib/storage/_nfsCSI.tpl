@@ -1,6 +1,6 @@
 {{/* NFS CSI */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.storage.nfsCSI" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the chart.
 objectData:
@@ -8,7 +8,7 @@ objectData:
   server: The server address.
   share: The share to the NFS share.
 */}}
-{{- define "tc.v1.common.lib.storage.nfsCSI" -}}
+{{- define "asa.v1.common.lib.storage.nfsCSI" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData }}
 csi:

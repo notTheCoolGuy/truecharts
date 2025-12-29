@@ -1,10 +1,10 @@
 {{/* Returns grpc action */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.actions.tcpSocket" (dict "rootCtx" $ "objectData" $objectData "caller" $caller) }}
+{{ include "asa.v1.common.lib.container.actions.tcpSocket" (dict "rootCtx" $ "objectData" $objectData "caller" $caller) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.actions.grpc" -}}
+{{- define "asa.v1.common.lib.container.actions.grpc" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $caller := .caller -}}

@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.service.integration.cilium" -}}
+{{- define "asa.v1.common.lib.service.integration.cilium" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
 
@@ -6,7 +6,7 @@
   {{- $cilium := $objectData.integrations.cilium -}}
 
   {{- if $cilium.enabled -}}
-    {{- include "tc.v1.common.lib.service.integration.validate" (dict "objectData" $objectData "integration" $cilium) -}}
+    {{- include "asa.v1.common.lib.service.integration.validate" (dict "objectData" $objectData "integration" $cilium) -}}
 
     {{- if and $cilium.sharedKey (ne $objectData.externalTrafficPolicy "Local") -}}
       {{/* If externalTrafficPolicy is not set or is not Local, add the shared key as annotation */}}

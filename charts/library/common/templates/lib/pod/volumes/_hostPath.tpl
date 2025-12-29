@@ -1,10 +1,10 @@
 {{/* Returns hostPath Volume */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.volume.hostPath" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.volume.hostPath" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the volume.
 */}}
-{{- define "tc.v1.common.lib.pod.volume.hostPath" -}}
+{{- define "asa.v1.common.lib.pod.volume.hostPath" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

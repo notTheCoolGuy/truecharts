@@ -1,12 +1,12 @@
 {{/* Ingress Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.ingress.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.ingress.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 objectData:
   rootCtx: The root context of the chart.
   objectData: The Ingress object.
 */}}
 
-{{- define "tc.v1.common.lib.ingress.validation" -}}
+{{- define "asa.v1.common.lib.ingress.validation" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -33,8 +33,8 @@ objectData:
 
   {{- if $objectData.ingressClassName -}}
     {{- $icn := tpl $objectData.ingressClassName $rootCtx -}}
-    {{- if eq $icn "tc-stopped" -}}
-      {{- fail "Ingress - Expected [ingressClassName] to not be [tc-stopped], this is reserved for internal use" -}}
+    {{- if eq $icn "asa-stopped" -}}
+      {{- fail "Ingress - Expected [ingressClassName] to not be [asa-stopped], this is reserved for internal use" -}}
     {{- end -}}
   {{- end -}}
 
@@ -137,10 +137,10 @@ objectData:
 
 {{/* Ingress Primary Validation */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.ingress.primaryValidation" $ -}}
+{{ include "asa.v1.common.lib.ingress.primaryValidation" $ -}}
 */}}
-{{- define "tc.v1.common.lib.ingress.primaryValidation" -}}
-  {{- $result := (include "tc.v1.common.lib.ingress.hasPrimary" $) | fromJson -}}
+{{- define "asa.v1.common.lib.ingress.primaryValidation" -}}
+  {{- $result := (include "asa.v1.common.lib.ingress.hasPrimary" $) | fromJson -}}
 
   {{/* Require at least one primary ingress, if any enabled */}}
   {{- if and $result.hasEnabled (not $result.hasPrimary) -}}
@@ -149,7 +149,7 @@ objectData:
 
 {{- end -}}
 
-{{- define "tc.v1.common.lib.ingress.hasPrimary" -}}
+{{- define "asa.v1.common.lib.ingress.hasPrimary" -}}
 
   {{/* Initialize values */}}
   {{- $hasPrimary := false -}}
@@ -157,7 +157,7 @@ objectData:
 
   {{- range $name, $ingress := $.Values.ingress -}}
 
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
               "rootCtx" $ "objectData" $ingress
               "name" $name "caller" "Ingress"
               "key" "ingress")) -}}

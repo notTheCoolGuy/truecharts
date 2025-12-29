@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.credentials.validation" -}}
+{{- define "asa.v1.common.lib.credentials.validation" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $caller := .caller -}}
   {{- $credName := .credName -}}
@@ -54,7 +54,7 @@
       {{- fail (printf "%s - Expected [key] in [credentials.%s.customCASecretRef] to be a string. Got [%s]" $caller $credName (kindOf $customCASecretRef.key)) -}}
     {{- end -}}
 
-    {{- $expandName := (include "tc.v1.common.lib.util.expandName" (dict
+    {{- $expandName := (include "asa.v1.common.lib.util.expandName" (dict
                     "rootCtx" $rootCtx "objectData" $customCASecretRef
                     "name" $customCASecretRef.name "caller" $caller
                     "key" (printf "credentials.%s.customCASecretRef.name" $credName))) -}}

@@ -1,11 +1,11 @@
 {{/* Labels that are added to podSpec */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.metadata.volumeLabels" $ }}
+{{ include "asa.v1.common.lib.metadata.volumeLabels" $ }}
 */}}
-{{- define "tc.v1.common.lib.metadata.volumeLabels" -}}
+{{- define "asa.v1.common.lib.metadata.volumeLabels" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
-  {{- $selectedVolumes := (include "tc.v1.common.lib.pod.volumes.selected" (dict "rootCtx" $rootCtx "objectData" $objectData)) | fromJson }}
+  {{- $selectedVolumes := (include "asa.v1.common.lib.pod.volumes.selected" (dict "rootCtx" $rootCtx "objectData" $objectData)) | fromJson }}
 
   {{- $names := list -}}
   {{- range $volume := $selectedVolumes.pvc -}}

@@ -1,17 +1,17 @@
 {{/* Ingress Spawwner */}}
 {{/* Call this template:
-{{ include "tc.v1.common.spawner.ingress" $ -}}
+{{ include "asa.v1.common.spawner.ingress" $ -}}
 */}}
 
-{{- define "tc.v1.common.spawner.ingress" -}}
-  {{- $fullname := include "tc.v1.common.lib.chart.names.fullname" $ -}}
+{{- define "asa.v1.common.spawner.ingress" -}}
+  {{- $fullname := include "asa.v1.common.lib.chart.names.fullname" $ -}}
 
   {{/* Validate that only 1 primary exists */}}
-  {{- include "tc.v1.common.lib.ingress.primaryValidation" $ -}}
+  {{- include "asa.v1.common.lib.ingress.primaryValidation" $ -}}
 
   {{- range $name, $ingress := .Values.ingress -}}
 
-    {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
               "rootCtx" $ "objectData" $ingress
               "name" $name "caller" "Ingress"
               "key" "ingress")) -}}
@@ -28,7 +28,7 @@
       {{/* Init object name */}}
       {{- $objectName := $name -}}
 
-      {{- $expandName := (include "tc.v1.common.lib.util.expandName" (dict
+      {{- $expandName := (include "asa.v1.common.lib.util.expandName" (dict
                 "rootCtx" $ "objectData" $objectData
                 "name" $name "caller" "Ingress"
                 "key" "ingress")) -}}
@@ -43,19 +43,19 @@
         {{- $objectName = (printf "%s-%s" $fullname $name) -}}
       {{- end -}}
 
-      {{- include "tc.v1.common.lib.util.metaListToDict" (dict "objectData" $objectData) -}}
+      {{- include "asa.v1.common.lib.util.metaListToDict" (dict "objectData" $objectData) -}}
 
       {{/* Perform validations */}}
-      {{- include "tc.v1.common.lib.chart.names.validation" (dict "name" $objectName "length" 253) -}}
-      {{- include "tc.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Ingress") -}}
-      {{- include "tc.v1.common.lib.ingress.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
+      {{- include "asa.v1.common.lib.chart.names.validation" (dict "name" $objectName "length" 253) -}}
+      {{- include "asa.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Ingress") -}}
+      {{- include "asa.v1.common.lib.ingress.validation" (dict "rootCtx" $ "objectData" $objectData) -}}
 
       {{/* Set the name of the ingress */}}
       {{- $_ := set $objectData "name" $objectName -}}
       {{- $_ := set $objectData "shortName" $name -}}
 
       {{/* Call class to create the object */}}
-      {{- include "tc.v1.common.class.ingress" (dict "rootCtx" $ "objectData" $objectData) -}}
+      {{- include "asa.v1.common.class.ingress" (dict "rootCtx" $ "objectData" $objectData) -}}
 
     {{- end -}}
   {{- end -}}

@@ -1,10 +1,10 @@
 {{/* Returns pod affinity  */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.affinity" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.affinity" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.pod.affinity" -}}
+{{- define "asa.v1.common.lib.pod.affinity" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -23,13 +23,13 @@ objectData: The object data to be used to render the Pod.
   {{/* If default affinity is enabled and its one of this types, then merge it with user input */}}
   {{- $validTypes := (list "Deployment" "StatefulSet") -}}
   {{- if and (mustHas $objectData.type $validTypes) $rootCtx.Values.podOptions.defaultAffinity }}
-    {{- $defaultAffinity := (include "tc.v1.common.lib.pod.defaultAffinity" (dict "rootCtx" $rootCtx "objectData" $objectData) | fromYaml) -}}
+    {{- $defaultAffinity := (include "asa.v1.common.lib.pod.defaultAffinity" (dict "rootCtx" $rootCtx "objectData" $objectData) | fromYaml) -}}
     {{- $defaultAffinity = $defaultAffinity | default dict -}}
     {{/* Merge user input overwriting the default */}}
     {{- $affinity = mustMergeOverwrite $defaultAffinity $affinity -}}
   {{- end -}}
 
-  {{- include "tc.v1.common.lib.pod.affinity.validation" (dict "rootCtx" $rootCtx "objectData" $affinity) -}}
+  {{- include "asa.v1.common.lib.pod.affinity.validation" (dict "rootCtx" $rootCtx "objectData" $affinity) -}}
 
   {{- if $affinity.nodeAffinity }}
 nodeAffinity:
@@ -38,16 +38,16 @@ nodeAffinity:
 
   {{- if $affinity.podAffinity }}
 podAffinity:
-    {{- include "tc.v1.common.lib.pod.podAffinityOrPodAntiAffinity" (dict "rootCtx" $rootCtx "data" $affinity.podAffinity) | nindent 2 -}}
+    {{- include "asa.v1.common.lib.pod.podAffinityOrPodAntiAffinity" (dict "rootCtx" $rootCtx "data" $affinity.podAffinity) | nindent 2 -}}
   {{- end -}}
 
   {{- if $affinity.podAntiAffinity }}
 podAntiAffinity:
-    {{- include "tc.v1.common.lib.pod.podAffinityOrPodAntiAffinity" (dict "rootCtx" $rootCtx "data" $affinity.podAntiAffinity) | nindent 2 -}}
+    {{- include "asa.v1.common.lib.pod.podAffinityOrPodAntiAffinity" (dict "rootCtx" $rootCtx "data" $affinity.podAntiAffinity) | nindent 2 -}}
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.podAffinityOrPodAntiAffinity" -}}
+{{- define "asa.v1.common.lib.pod.podAffinityOrPodAntiAffinity" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := .data -}}
 
@@ -55,7 +55,7 @@ podAntiAffinity:
     {{- if $data.requiredDuringSchedulingIgnoredDuringExecution }}
   requiredDuringSchedulingIgnoredDuringExecution:
       {{- range $term := $data.requiredDuringSchedulingIgnoredDuringExecution }}
-    - {{ include "tc.v1.common.lib.pod.podAffinityTerm" (dict "rootCtx" $rootCtx "data" $term) | trim | nindent 6 }}
+    - {{ include "asa.v1.common.lib.pod.podAffinityTerm" (dict "rootCtx" $rootCtx "data" $term) | trim | nindent 6 }}
       {{- end -}}
     {{- end -}}
 
@@ -64,13 +64,13 @@ podAntiAffinity:
       {{- range $term := $data.preferredDuringSchedulingIgnoredDuringExecution }}
       - weight: {{ $term.weight }}
         podAffinityTerm:
-          {{- include "tc.v1.common.lib.pod.podAffinityTerm" (dict "rootCtx" $rootCtx "data" $term.podAffinityTerm) | nindent 10 }}
+          {{- include "asa.v1.common.lib.pod.podAffinityTerm" (dict "rootCtx" $rootCtx "data" $term.podAffinityTerm) | nindent 10 }}
       {{- end -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.podAffinityTerm" -}}
+{{- define "asa.v1.common.lib.pod.podAffinityTerm" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := .data -}}
 
@@ -100,17 +100,17 @@ namespaces:
 
     {{- if $data.labelSelector }}
 labelSelector:
-      {{- include "tc.v1.common.lib.pod.labelSelector" (dict "rootCtx" $rootCtx "data" $data.labelSelector) | nindent 2 -}}
+      {{- include "asa.v1.common.lib.pod.labelSelector" (dict "rootCtx" $rootCtx "data" $data.labelSelector) | nindent 2 -}}
     {{- end -}}
 
     {{- if $data.namespaceSelector }}
 namespaceSelector:
-      {{- include "tc.v1.common.lib.pod.labelSelector" (dict "rootCtx" $rootCtx "data" $data.namespaceSelector) | nindent 2 -}}
+      {{- include "asa.v1.common.lib.pod.labelSelector" (dict "rootCtx" $rootCtx "data" $data.namespaceSelector) | nindent 2 -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.labelSelector" -}}
+{{- define "asa.v1.common.lib.pod.labelSelector" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := .data }}
 
@@ -136,11 +136,11 @@ matchLabels:
 {{- end -}}
 
 
-{{- define "tc.v1.common.lib.pod.defaultAffinity" -}}
+{{- define "asa.v1.common.lib.pod.defaultAffinity" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
-  {{- $selectedVolumes := (include "tc.v1.common.lib.pod.volumes.selected" (dict "rootCtx" $rootCtx "objectData" $objectData)) | fromJson }}
+  {{- $selectedVolumes := (include "asa.v1.common.lib.pod.volumes.selected" (dict "rootCtx" $rootCtx "objectData" $objectData)) | fromJson }}
 
   {{- $names := list -}}
   {{- range $volume := $selectedVolumes.pvc -}}

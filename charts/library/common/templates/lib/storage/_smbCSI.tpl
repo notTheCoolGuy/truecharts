@@ -1,6 +1,6 @@
 {{/* SMB CSI */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.storage.smbCSI" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.storage.smbCSI" (dict "rootCtx" $ "objectData" $objectData) }}
 
 rootCtx: The root context of the chart.
 objectData:
@@ -8,7 +8,7 @@ objectData:
   server: The server address.
   share: The share to the SMB share.
 */}}
-{{- define "tc.v1.common.lib.storage.smbCSI" -}}
+{{- define "asa.v1.common.lib.storage.smbCSI" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData }}
 csi:

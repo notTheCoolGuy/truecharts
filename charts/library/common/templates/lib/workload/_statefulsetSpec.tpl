@@ -1,16 +1,16 @@
 {{/* StatefulSet Spec */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.workload.statefulsetSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.workload.statefulsetSpec" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData:
   replicas: The number of replicas.
   revisionHistoryLimit: The number of old ReplicaSets to retain to allow rollback.
   strategy: The statefulset strategy to use to replace existing pods with new ones.
 */}}
-{{- define "tc.v1.common.lib.workload.statefulsetSpec" -}}
+{{- define "asa.v1.common.lib.workload.statefulsetSpec" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
-  {{- include "tc.v1.common.lib.workload.components.strategyType" (dict
+  {{- include "asa.v1.common.lib.workload.components.strategyType" (dict
     "rootCtx" $rootCtx "objectData" $objectData
     "defaultStrategy" "RollingUpdate" "resource" "StatefulSet"
   ) -}}
@@ -18,7 +18,7 @@ objectData:
   {{- if hasKey $objectData "replicas" -}}
     {{- $replicas = $objectData.replicas -}}
   {{- end -}}
-  {{- if (include "tc.v1.common.lib.util.stopAll" $rootCtx) -}}
+  {{- if (include "asa.v1.common.lib.util.stopAll" $rootCtx) -}}
     {{- $replicas = 0 -}}
   {{- end }}
 replicas: {{ $replicas }}

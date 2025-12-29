@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.metadata.namespace" -}}
+{{- define "asa.v1.common.lib.metadata.namespace" -}}
   {{- $caller := .caller -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}

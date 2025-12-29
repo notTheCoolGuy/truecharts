@@ -1,8 +1,8 @@
 {{/*
 Blueprint for the NetworkPolicy object
 */}}
-{{- define "tc.v1.common.class.networkpolicy" -}}
-  {{- $fullName := include "tc.v1.common.lib.chart.names.fullname" . -}}
+{{- define "asa.v1.common.class.networkpolicy" -}}
+  {{- $fullName := include "asa.v1.common.lib.chart.names.fullname" . -}}
   {{- $networkPolicyName := $fullName -}}
   {{- $values := .Values.networkPolicy -}}
 
@@ -23,13 +23,13 @@ apiVersion: "networking.k8s.io/v1"
 metadata:
   name: {{ $networkPolicyName }}
   namespace: {{ $.Values.namespace | default $.Values.global.namespace | default $.Release.Namespace }}
-  {{- $labels := (mustMerge ($networkpolicyLabels | default dict) (include "tc.v1.common.lib.metadata.allLabels" $ | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $ "labels" $labels) | trim) }}
+  {{- $labels := (mustMerge ($networkpolicyLabels | default dict) (include "asa.v1.common.lib.metadata.allLabels" $ | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $ "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- $annotations := (mustMerge ($networkpolicyAnnotations | default dict) (include "tc.v1.common.lib.metadata.allAnnotations" $ | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $ "annotations" $annotations) | trim) }}
+  {{- $annotations := (mustMerge ($networkpolicyAnnotations | default dict) (include "asa.v1.common.lib.metadata.allAnnotations" $ | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $ "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
@@ -39,13 +39,13 @@ spec:
   {{- tpl (toYaml $values.podSelector) $ | nindent 4 }}
   {{- else if $values.targetSelector }}
     {{- $objectData := dict "targetSelector" $values.targetSelector }}
-    {{- $selectedPod := fromYaml ( include "tc.v1.common.lib.helpers.getSelectedPodValues" (dict "rootCtx" $ "objectData" $objectData)) }}
+    {{- $selectedPod := fromYaml ( include "asa.v1.common.lib.helpers.getSelectedPodValues" (dict "rootCtx" $ "objectData" $objectData)) }}
     {{- $selectedPodName := $selectedPod.shortName }}
     matchLabels:
-      {{- include "tc.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $ "objectType" "pod" "objectName" $selectedPodName) | indent 8 }}
+      {{- include "asa.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $ "objectType" "pod" "objectName" $selectedPodName) | indent 8 }}
   {{- else }}
     matchLabels:
-      {{- include "tc.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $ "objectType" "" "objectName" "") | indent 8 }}
+      {{- include "asa.v1.common.lib.metadata.selectorLabels" (dict "rootCtx" $ "objectType" "" "objectName" "") | indent 8 }}
   {{- end }}
 
   {{- if $values.policyType }}

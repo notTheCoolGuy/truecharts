@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.util.stopAll" -}}
+{{- define "asa.v1.common.lib.util.stopAll" -}}
   {{- $rootCtx := . -}}
 
   {{- $stop := "" -}}

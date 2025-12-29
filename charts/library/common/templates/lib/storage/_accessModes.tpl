@@ -1,11 +1,11 @@
 {{/* PVC - Access Modes */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData: The object data of the pvc
 */}}
 
-{{- define "tc.v1.common.lib.pvc.accessModes" -}}
+{{- define "asa.v1.common.lib.pvc.accessModes" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $caller := .caller -}}

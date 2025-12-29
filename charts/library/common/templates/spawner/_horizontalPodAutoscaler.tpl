@@ -1,12 +1,12 @@
 {{/* horizontal Pod Autoscaler Spawner */}}
 {{/* Call this template:
-{{ include "tc.v1.common.spawner.hpa" $ -}}
+{{ include "asa.v1.common.spawner.hpa" $ -}}
 */}}
 
-{{- define "tc.v1.common.spawner.hpa" -}}
-  {{- $fullname := include "tc.v1.common.lib.chart.names.fullname" $ -}}
+{{- define "asa.v1.common.spawner.hpa" -}}
+  {{- $fullname := include "asa.v1.common.lib.chart.names.fullname" $ -}}
   {{- range $name, $hpa := .Values.hpa -}}
-    {{- $enabledHPA := (include "tc.v1.common.lib.util.enabled" (dict
+    {{- $enabledHPA := (include "asa.v1.common.lib.util.enabled" (dict
                     "rootCtx" $ "objectData" $hpa
                     "name" $name "caller" "Horizontal Pod Autoscaler"
                     "key" "hpa")) -}}
@@ -15,11 +15,11 @@
 
     {{- $objectData := (mustDeepCopy $hpa) -}}
     {{- $_ := set $objectData "hpaName" $name -}}
-    {{- include "tc.v1.common.lib.chart.names.validation" (dict "name" $name) -}}
+    {{- include "asa.v1.common.lib.chart.names.validation" (dict "name" $name) -}}
 
     {{- range $workloadName, $workload := $.Values.workload -}}
 
-      {{- $enabled := (include "tc.v1.common.lib.util.enabled" (dict
+      {{- $enabled := (include "asa.v1.common.lib.util.enabled" (dict
                       "rootCtx" $ "objectData" $workload
                       "name" $name "caller" "hpa"
                       "key" "workload")) -}}
@@ -27,7 +27,7 @@
       {{- if ne $enabled "true" -}}{{- continue -}}{{- end -}}
       {{- $containerNames := list -}}
       {{- range $cName, $c := $workload.podSpec.containers -}}
-        {{- $enabledContainer := (include "tc.v1.common.lib.util.enabled" (dict
+        {{- $enabledContainer := (include "asa.v1.common.lib.util.enabled" (dict
                         "rootCtx" $ "objectData" $c
                         "name" $cName "caller" "Vertical Pod Autoscaler"
                         "key" "workload.podSpec.containers")) -}}
@@ -35,7 +35,7 @@
         {{- $containerNames = mustAppend $containerNames $cName -}}
       {{- end -}}
       {{- $_ := set $objectData "containerNames" $containerNames -}}
-      {{- include "tc.v1.common.lib.hpa.validation" (dict "objectData" $objectData "rootCtx" $) -}}
+      {{- include "asa.v1.common.lib.hpa.validation" (dict "objectData" $objectData "rootCtx" $) -}}
 
       {{/* Create a copy of the workload */}}
       {{- $_ := set $objectData "workload" (mustDeepCopy $workload) -}}
@@ -47,8 +47,8 @@
       {{- end -}}
 
       {{/* Perform validations */}}
-      {{- include "tc.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
-      {{- include "tc.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Horizontal Pod Autoscaler") -}}
+      {{- include "asa.v1.common.lib.chart.names.validation" (dict "name" $objectName) -}}
+      {{- include "asa.v1.common.lib.metadata.validation" (dict "objectData" $objectData "caller" "Horizontal Pod Autoscaler") -}}
 
       {{/* Set the name of the workload */}}
       {{- $_ := set $objectData "name" $objectName -}}
@@ -60,7 +60,7 @@
         {{/* Call class to create the object */}}
         {{- $types := (list "Deployment" "StatefulSet" "DaemonSet") -}}
         {{- if (mustHas $objectData.workload.type $types) -}}
-          {{- include "tc.v1.common.class.hpa" (dict "rootCtx" $ "objectData" $objectData) -}}
+          {{- include "asa.v1.common.class.hpa" (dict "rootCtx" $ "objectData" $objectData) -}}
         {{- end -}}
       {{- end -}}
 

@@ -1,10 +1,10 @@
 {{/* Returns command list */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.command" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.command" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.command" -}}
+{{- define "asa.v1.common.lib.container.command" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

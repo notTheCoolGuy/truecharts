@@ -1,5 +1,5 @@
 {{/* Contains the auto-permissions job */}}
-{{- define "tc.v1.common.lib.util.autoperms" -}}
+{{- define "asa.v1.common.lib.util.autoperms" -}}
 
 {{- $permAllowedTypes := (list "hostPath" "emptyDir" "nfs") -}}
 {{/* If you change this path, you must change it under _volumeMounts.tpl too*/}}
@@ -132,8 +132,8 @@ podSpec:
 {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.util.autoperms.job" -}}
-  {{- $job := (include "tc.v1.common.lib.util.autoperms" $) | fromYaml -}}
+{{- define "asa.v1.common.lib.util.autoperms.job" -}}
+  {{- $job := (include "asa.v1.common.lib.util.autoperms" $) | fromYaml -}}
   {{- if $job -}}
     # If you change this name, you must change it under _volumes.tpl
     {{- $_ := set $.Values.workload "autopermissions" $job -}}

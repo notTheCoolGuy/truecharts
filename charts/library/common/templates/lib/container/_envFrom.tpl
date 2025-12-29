@@ -1,10 +1,10 @@
 {{/* Returns Env From */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.container.envFrom" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.container.envFrom" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the container.
 */}}
-{{- define "tc.v1.common.lib.container.envFrom" -}}
+{{- define "asa.v1.common.lib.container.envFrom" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
   {{- $key := .key -}}
@@ -29,7 +29,7 @@ objectData: The object data to be used to render the container.
 
         {{- $objectName := tpl .name $rootCtx -}}
 
-        {{- $expandName := (include "tc.v1.common.lib.util.expandName" (dict
+        {{- $expandName := (include "asa.v1.common.lib.util.expandName" (dict
                         "rootCtx" $rootCtx "objectData" .
                         "name" $ref "caller" $caller
                         "key" "envFrom")) -}}
@@ -49,10 +49,10 @@ objectData: The object data to be used to render the container.
               {{- fail (printf "%s - Expected %s [%s] defined in [%s.%s.envFrom] to exist" $caller $source $objectName $key $name) -}}
             {{- end -}}
           {{- range $k, $v := $object.data -}}
-            {{- include "tc.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s - %s" $source $objectName) "key" $k "caller" $caller) -}}
+            {{- include "asa.v1.common.helpers.container.envDupeCheck" (dict "rootCtx" $rootCtx "objectData" $objectData "source" (printf "%s - %s" $source $objectName) "key" $k "caller" $caller) -}}
           {{- end -}}
 
-          {{- $objectName = (printf "%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
+          {{- $objectName = (printf "%s-%s" (include "asa.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
         {{- end }}
 - {{ $ref }}:
     name: {{ $objectName | quote }}

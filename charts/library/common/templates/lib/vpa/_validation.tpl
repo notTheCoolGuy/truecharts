@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.vpa.validation" -}}
+{{- define "asa.v1.common.lib.vpa.validation" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
 
@@ -91,7 +91,7 @@
         {{- end -}}
       {{- end -}}
 
-      {{- $data := (include "tc.v1.common.lib.resources.validation.data" .) | fromJson -}}
+      {{- $data := (include "asa.v1.common.lib.resources.validation.data" .) | fromJson -}}
       {{- $regex := $data.regex -}}
       {{- $errorMsg := $data.errorMsg -}}
 

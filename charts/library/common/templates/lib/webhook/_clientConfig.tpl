@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.webhook.clientConfig" -}}
+{{- define "asa.v1.common.lib.webhook.clientConfig" -}}
   {{- $clientConfig := .clientConfig -}}
   {{- $rootCtx := .rootCtx }}
 clientConfig:

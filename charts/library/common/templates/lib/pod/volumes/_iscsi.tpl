@@ -1,10 +1,10 @@
 {{/* Returns iscsi Volume */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.volume.iscsi" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.volume.iscsi" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the volume.
 */}}
-{{- define "tc.v1.common.lib.pod.volume.iscsi" -}}
+{{- define "asa.v1.common.lib.pod.volume.iscsi" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -55,7 +55,7 @@ objectData: The object data to be used to render the volume.
       {{- end -}}
     {{- end }}
     iqn: {{ tpl $objectData.iscsi.iqn $rootCtx }}
-    lun: {{ include "tc.v1.common.helpers.makeIntOrNoop" $lun }}
+    lun: {{ include "asa.v1.common.helpers.makeIntOrNoop" $lun }}
     {{- with $objectData.iscsi.iscsiInterface }}
     iscsiInterface: {{ tpl . $rootCtx }}
     {{- end -}}
@@ -68,7 +68,7 @@ objectData: The object data to be used to render the volume.
     chapAuthSession: {{ $authSession }}
     chapAuthDiscovery: {{ $authDiscovery }}
     {{- if or $authSession $authDiscovery -}}
-      {{- $secretName := (printf "%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $objectData.shortName) }}
+      {{- $secretName := (printf "%s-%s" (include "asa.v1.common.lib.chart.names.fullname" $rootCtx) $objectData.shortName) }}
     secretRef:
         name: {{ $secretName }}
     {{- end -}}

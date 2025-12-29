@@ -1,10 +1,10 @@
 {{/* Returns Secret Volume */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.volume.secret" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.volume.secret" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the volume.
 */}}
-{{- define "tc.v1.common.lib.pod.volume.secret" -}}
+{{- define "asa.v1.common.lib.pod.volume.secret" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -14,7 +14,7 @@ objectData: The object data to be used to render the volume.
 
   {{- $objectName := tpl $objectData.objectName $rootCtx -}}
 
-  {{- $expandName := (include "tc.v1.common.lib.util.expandName" (dict
+  {{- $expandName := (include "asa.v1.common.lib.util.expandName" (dict
                   "rootCtx" $rootCtx "objectData" $objectData
                   "name" $objectData.shortName "caller" "Secret"
                   "key" "secret")) -}}
@@ -25,7 +25,7 @@ objectData: The object data to be used to render the volume.
       {{- fail (printf "Persistence - Expected secret [%s] defined in [objectName] to exist" $objectName) -}}
     {{- end -}}
 
-    {{- $objectName = (printf "%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
+    {{- $objectName = (printf "%s-%s" (include "asa.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
   {{- end -}}
 
   {{- $optional := false -}}

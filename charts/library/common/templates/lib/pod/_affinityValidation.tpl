@@ -1,17 +1,17 @@
-{{- define "tc.v1.common.lib.pod.affinity.validation" -}}
+{{- define "asa.v1.common.lib.pod.affinity.validation" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
   {{- if $objectData.podAffinity -}}
-    {{- include "tc.v1.common.lib.pod.affinity.validation.podAffinityOrPodAntiAffinity" (dict "rootCtx" $rootCtx "data" $objectData.podAffinity "key" "podAffinity") -}}
+    {{- include "asa.v1.common.lib.pod.affinity.validation.podAffinityOrPodAntiAffinity" (dict "rootCtx" $rootCtx "data" $objectData.podAffinity "key" "podAffinity") -}}
   {{- end -}}
 
   {{- if $objectData.podAntiAffinity -}}
-    {{- include "tc.v1.common.lib.pod.affinity.validation.podAffinityOrPodAntiAffinity" (dict "rootCtx" $rootCtx "data" $objectData.podAntiAffinity "key" "podAntiAffinity") -}}
+    {{- include "asa.v1.common.lib.pod.affinity.validation.podAffinityOrPodAntiAffinity" (dict "rootCtx" $rootCtx "data" $objectData.podAntiAffinity "key" "podAntiAffinity") -}}
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.affinity.validation.podAffinityOrPodAntiAffinity" -}}
+{{- define "asa.v1.common.lib.pod.affinity.validation.podAffinityOrPodAntiAffinity" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := .data -}}
   {{- $key := .key -}}
@@ -28,7 +28,7 @@
       {{- end -}}
 
       {{- range $idx, $item := $itemData -}}
-        {{- include "tc.v1.common.lib.pod.affinity.validation.podAffinityTerm" (dict "rootCtx" $rootCtx "data" $item "key" (printf "%s.requiredDuringSchedulingIgnoredDuringExecution.%d" $key $idx)) -}}
+        {{- include "asa.v1.common.lib.pod.affinity.validation.podAffinityTerm" (dict "rootCtx" $rootCtx "data" $item "key" (printf "%s.requiredDuringSchedulingIgnoredDuringExecution.%d" $key $idx)) -}}
       {{- end -}}
     {{- end -}}
 
@@ -52,14 +52,14 @@
           {{- fail (printf "Affinity - Expected [affinity.%s.preferredDuringSchedulingIgnoredDuringExecution.%d.podAffinityTerm] to be defined" $key $idx) -}}
         {{- end -}}
 
-        {{- include "tc.v1.common.lib.pod.affinity.validation.podAffinityTerm" (dict "rootCtx" $rootCtx "data" $item.podAffinityTerm "key" (printf "%s.preferredDuringSchedulingIgnoredDuringExecution.%d.podAffinityTerm" $key $idx)) -}}
+        {{- include "asa.v1.common.lib.pod.affinity.validation.podAffinityTerm" (dict "rootCtx" $rootCtx "data" $item.podAffinityTerm "key" (printf "%s.preferredDuringSchedulingIgnoredDuringExecution.%d.podAffinityTerm" $key $idx)) -}}
       {{- end -}}
     {{- end -}}
 
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.affinity.validation.podAffinityTerm" -}}
+{{- define "asa.v1.common.lib.pod.affinity.validation.podAffinityTerm" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := .data -}}
   {{- $key := .key -}}
@@ -105,15 +105,15 @@
   {{- end -}}
 
   {{- if $data.labelSelector -}}
-    {{- include "tc.v1.common.lib.pod.affinity.validation.labelSelector" (dict "rootCtx" $rootCtx "key" (printf "%s.labelSelector" $key) "data" $data.labelSelector) -}}
+    {{- include "asa.v1.common.lib.pod.affinity.validation.labelSelector" (dict "rootCtx" $rootCtx "key" (printf "%s.labelSelector" $key) "data" $data.labelSelector) -}}
   {{- end -}}
 
   {{- if $data.namespaceSelector -}}
-    {{- include "tc.v1.common.lib.pod.affinity.validation.labelSelector" (dict "rootCtx" $rootCtx "key" (printf "%s.namespaceSelector" $key) "data" $data.namespaceSelector) -}}
+    {{- include "asa.v1.common.lib.pod.affinity.validation.labelSelector" (dict "rootCtx" $rootCtx "key" (printf "%s.namespaceSelector" $key) "data" $data.namespaceSelector) -}}
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.pod.affinity.validation.labelSelector" -}}
+{{- define "asa.v1.common.lib.pod.affinity.validation.labelSelector" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $key := .key -}}
   {{- $data := .data -}}

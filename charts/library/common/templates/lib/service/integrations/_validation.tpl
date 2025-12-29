@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.service.integration.validate" -}}
+{{- define "asa.v1.common.lib.service.integration.validate" -}}
   {{- $objectData := .objectData -}}
   {{- $integration := .integration -}}
 
@@ -7,7 +7,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.service.loadbalancer.validate" -}}
+{{- define "asa.v1.common.lib.service.loadbalancer.validate" -}}
   {{- $objectData := .objectData -}}
 
   {{- if and $objectData.loadBalancerIPs (not (kindIs "slice" $objectData.loadBalancerIPs)) -}}

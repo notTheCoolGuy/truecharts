@@ -2,7 +2,7 @@
 This template serves as a blueprint for vertical pod autoscaler objects that are created
 using the common library.
 */}}
-{{- define "tc.v1.common.class.vpa" -}}
+{{- define "asa.v1.common.class.vpa" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -13,14 +13,14 @@ apiVersion: autoscaling.k8s.io/v1
 kind: VerticalPodAutoscaler
 metadata:
   name: {{ $objectData.name }}
-  namespace: {{ include "tc.v1.common.lib.metadata.namespace" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "VPA") }}
-  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "tc.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
+  namespace: {{ include "asa.v1.common.lib.metadata.namespace" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "VPA") }}
+  {{- $labels := (mustMerge ($objectData.labels | default dict) (include "asa.v1.common.lib.metadata.allLabels" $rootCtx | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "tc.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
+  {{- $annotations := (mustMerge ($objectData.annotations | default dict) (include "asa.v1.common.lib.metadata.allAnnotations" $rootCtx | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $rootCtx "annotations" $annotations) | trim) }}
   annotations:
     {{- . | nindent 4 }}
   {{- end }}
@@ -53,17 +53,17 @@ spec:
         controlledResources: {{ $cPol.controlledResources | toJson }}
       {{- end -}}
       {{- with $cPol.minAllowed -}}
-        {{- include "tc.v1.common.class.vpa.resources" (dict "item" "minAllowed" "resources" $cPol.minAllowed) | nindent 8 -}}
+        {{- include "asa.v1.common.class.vpa.resources" (dict "item" "minAllowed" "resources" $cPol.minAllowed) | nindent 8 -}}
       {{- end -}}
       {{- with $cPol.maxAllowed -}}
-        {{- include "tc.v1.common.class.vpa.resources" (dict "item" "maxAllowed" "resources" $cPol.maxAllowed) | nindent 8 -}}
+        {{- include "asa.v1.common.class.vpa.resources" (dict "item" "maxAllowed" "resources" $cPol.maxAllowed) | nindent 8 -}}
       {{- end -}}
 
     {{- end -}}
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.class.vpa.resources" -}}
+{{- define "asa.v1.common.class.vpa.resources" -}}
   {{- $item := .item -}}
   {{- $resources := .resources -}}
 

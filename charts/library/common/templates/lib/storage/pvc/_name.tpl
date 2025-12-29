@@ -1,19 +1,19 @@
 {{/* Returns Persitent Volume Claim name*/}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.storage.pvc.name" (dict "rootCtx" $ "objectName" $objectName "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.storage.pvc.name" (dict "rootCtx" $ "objectName" $objectName "objectData" $objectData) }}
 objectName: the base name of the object without any alteration or sanitation
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.storage.pvc.name" -}}
+{{- define "asa.v1.common.lib.storage.pvc.name" -}}
 {{- $rootCtx := .rootCtx -}}
 {{- $objectName := .objectName -}}
 {{- $objectData := .objectData -}}
 {{- $hashValues := "" -}}
 
-  {{- $renderedName := (printf "%s-%s" (include "tc.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
+  {{- $renderedName := (printf "%s-%s" (include "asa.v1.common.lib.chart.names.fullname" $rootCtx) $objectName) -}}
   {{/* Perform validations */}}
-  {{- include "tc.v1.common.lib.chart.names.validation" (dict "name" $renderedName) -}}
+  {{- include "asa.v1.common.lib.chart.names.validation" (dict "name" $renderedName) -}}
 
   {{- $modes := (list "smb" "nfs") -}}
   {{- if $objectData.static -}}

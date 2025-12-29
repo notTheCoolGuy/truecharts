@@ -2,7 +2,7 @@
 Template to render code-server addon
 It will include / inject the required templates based on the given values.
 */}}
-{{- define "tc.v1.common.addons.netshoot" -}}
+{{- define "asa.v1.common.addons.netshoot" -}}
   {{- $netshoot := $.Values.addons.netshoot -}}
   {{- if $netshoot.enabled -}}
     {{- $targetSelector := list "main" -}}

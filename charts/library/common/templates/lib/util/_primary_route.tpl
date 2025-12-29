@@ -1,5 +1,5 @@
 {{/* Return the name of the primary route object */}}
-{{- define "tc.v1.common.lib.util.route.primary" -}}
+{{- define "asa.v1.common.lib.util.route.primary" -}}
   {{- $routees := $.Values.route -}}
 
   {{- $enabledroutees := dict -}}

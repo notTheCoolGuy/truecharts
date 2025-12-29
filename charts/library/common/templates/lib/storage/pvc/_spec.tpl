@@ -1,10 +1,10 @@
 {{/* Returns Persitant Volume Claim Spec*/}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.storage.pvc.spec" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.storage.pvc.spec" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.storage.pvc.spec" -}}
+{{- define "asa.v1.common.lib.storage.pvc.spec" -}}
 {{- $rootCtx := .rootCtx -}}
 {{- $objectData := .objectData -}}
 
@@ -14,21 +14,21 @@ objectData: The object data to be used to render the Pod.
 {{- end }}
 
 accessModes:
-  {{- include "tc.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "PVC") | trim | nindent 2 }}
+  {{- include "asa.v1.common.lib.pvc.accessModes" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "PVC") | trim | nindent 2 }}
 resources:
   requests:
     storage: {{ $size }}
   {{- with $objectData.volumeName }}
 volumeName: {{ tpl . $rootCtx }}
   {{- end -}}
-  {{- with (include "tc.v1.common.lib.storage.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "PVC") | trim) }}
+  {{- with (include "asa.v1.common.lib.storage.storageClassName" (dict "rootCtx" $rootCtx "objectData" $objectData "caller" "PVC") | trim) }}
 storageClassName: {{ . }}
   {{- end -}}
   {{- with $objectData.dataSource -}}
     {{- $sourceName := .name -}}
     {{- if eq .kind "PersistentVolumeClaim" -}}
       {{- with get $rootCtx.persistence $sourceName -}}
-        {{- $sourceName := (include "tc.v1.common.lib.storage.pvc.name" (dict "rootCtx" $rootCtx "objectName" $sourceName "objectData" .)) -}}
+        {{- $sourceName := (include "asa.v1.common.lib.storage.pvc.name" (dict "rootCtx" $rootCtx "objectName" $sourceName "objectData" .)) -}}
       {{- end -}}
     {{- end }}
 dataSource:

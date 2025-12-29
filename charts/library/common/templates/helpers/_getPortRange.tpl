@@ -1,10 +1,10 @@
 {{/* Returns Lowest and Highest ports assigned to the any container in the pod */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.helpers.securityContext.getPortRange" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.helpers.securityContext.getPortRange" -}}
+{{- define "asa.v1.common.lib.helpers.securityContext.getPortRange" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 

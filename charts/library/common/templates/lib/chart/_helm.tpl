@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.chart.helm.version" -}}
+{{- define "asa.v1.common.lib.chart.helm.version" -}}
   {{- $helmVersion := semver .Capabilities.HelmVersion.Version -}}
   {{- $helmMinVer := semver "3.14.0" -}}
 

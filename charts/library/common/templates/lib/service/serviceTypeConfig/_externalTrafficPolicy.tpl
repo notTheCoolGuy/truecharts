@@ -1,11 +1,11 @@
 {{/* Service - externalTrafficPolicy */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.service.externalTrafficPolicy" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+{{ include "asa.v1.common.lib.service.externalTrafficPolicy" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
 rootCtx: The root context of the chart.
 objectData: The service object data
 */}}
 
-{{- define "tc.v1.common.lib.service.externalTrafficPolicy" -}}
+{{- define "asa.v1.common.lib.service.externalTrafficPolicy" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData }}
 

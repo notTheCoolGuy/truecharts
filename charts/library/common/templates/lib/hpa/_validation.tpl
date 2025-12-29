@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.hpa.validation" -}}
+{{- define "asa.v1.common.lib.hpa.validation" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
 
@@ -27,20 +27,20 @@
 
   {{- if $objectData.behavior -}}
     {{- if $objectData.behavior.scaleUp -}}
-      {{- include "tc.v1.common.lib.hpa.validation.behavior" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $objectData.behavior.scaleUp "key" "scaleUp") -}}
+      {{- include "asa.v1.common.lib.hpa.validation.behavior" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $objectData.behavior.scaleUp "key" "scaleUp") -}}
     {{- end -}}
     {{- if $objectData.behavior.scaleDown -}}
-      {{- include "tc.v1.common.lib.hpa.validation.behavior" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $objectData.behavior.scaleDown "key" "scaleDown") -}}
+      {{- include "asa.v1.common.lib.hpa.validation.behavior" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $objectData.behavior.scaleDown "key" "scaleDown") -}}
     {{- end -}}
   {{- end -}}
 
   {{- if $objectData.metrics -}}
-    {{- include "tc.v1.common.lib.hpa.validation.metrics" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $objectData.metrics) -}}
+    {{- include "asa.v1.common.lib.hpa.validation.metrics" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $objectData.metrics) -}}
   {{- end -}}
 
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.behavior" -}}
+{{- define "asa.v1.common.lib.hpa.validation.behavior" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := .data -}}
@@ -94,7 +94,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.metrics" -}}
+{{- define "asa.v1.common.lib.hpa.validation.metrics" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
 
@@ -112,21 +112,21 @@
     {{- end -}}
 
     {{- if eq $metric.type "Resource" -}}
-      {{- include "tc.v1.common.lib.hpa.validation.metrics.resource" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
+      {{- include "asa.v1.common.lib.hpa.validation.metrics.resource" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
     {{- else if eq $metric.type "Pods" -}}
-      {{- include "tc.v1.common.lib.hpa.validation.metrics.pods" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
+      {{- include "asa.v1.common.lib.hpa.validation.metrics.pods" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
     {{- else if eq $metric.type "Object" -}}
-      {{- include "tc.v1.common.lib.hpa.validation.metrics.object" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
+      {{- include "asa.v1.common.lib.hpa.validation.metrics.object" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
     {{- else if eq $metric.type "External" -}}
-      {{- include "tc.v1.common.lib.hpa.validation.metrics.external" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
+      {{- include "asa.v1.common.lib.hpa.validation.metrics.external" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
     {{- else if eq $metric.type "ContainerResource" -}}
-      {{- include "tc.v1.common.lib.hpa.validation.metrics.containerResource" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
+      {{- include "asa.v1.common.lib.hpa.validation.metrics.containerResource" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric "idx" $idx) -}}
     {{- end -}}
 
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.metrics.resource" -}}
+{{- define "asa.v1.common.lib.hpa.validation.metrics.resource" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $metric := .metric -}}
@@ -141,10 +141,10 @@
     {{- fail (printf "Horizontal Pod Autoscaler - Expected [hpa.%s.metrics.%d.resource.name] to be one of [%s], but got [%s]" $objectData.hpaName $idx (join ", " $validNames) $metric.resource.name) -}}
   {{- end -}}
 
-  {{- include "tc.v1.common.lib.hpa.validation.metrics.metric.target" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric.resource "key" "resource" "idx" $idx) -}}
+  {{- include "asa.v1.common.lib.hpa.validation.metrics.metric.target" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric.resource "key" "resource" "idx" $idx) -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.metrics.containerResource" -}}
+{{- define "asa.v1.common.lib.hpa.validation.metrics.containerResource" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $metric := .metric -}}
@@ -163,10 +163,10 @@
     {{- fail (printf "Horizontal Pod Autoscaler - Expected [hpa.%s.metrics.%d.containerResource.container] to be one of [%s], but got [%s]" $objectData.hpaName $idx (join ", " $objectData.containerNames) $metric.containerResource.container) -}}
   {{- end -}}
 
-  {{- include "tc.v1.common.lib.hpa.validation.metrics.metric.target" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric.containerResource "key" "containerResource" "idx" $idx) -}}
+  {{- include "asa.v1.common.lib.hpa.validation.metrics.metric.target" (dict "objectData" $objectData "rootCtx" $rootCtx "metric" $metric.containerResource "key" "containerResource" "idx" $idx) -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.metrics.pods" -}}
+{{- define "asa.v1.common.lib.hpa.validation.metrics.pods" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $metric := .metric -}}
@@ -193,12 +193,12 @@
   {{- end -}}
 
   {{- if $metric.pods.metric.selector -}}
-    {{- include "tc.v1.common.lib.hpa.validation.metric.selector" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $metric.pods "key" "pods" "idx" $idx) -}}
+    {{- include "asa.v1.common.lib.hpa.validation.metric.selector" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $metric.pods "key" "pods" "idx" $idx) -}}
   {{- end -}}
 
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.metric.selector" -}}
+{{- define "asa.v1.common.lib.hpa.validation.metric.selector" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := .data -}}
@@ -225,7 +225,7 @@
 
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.metrics.object" -}}
+{{- define "asa.v1.common.lib.hpa.validation.metrics.object" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $metric := .metric -}}
@@ -263,7 +263,7 @@
   {{- end -}}
 
   {{- if $metric.object.metric.selector -}}
-    {{- include "tc.v1.common.lib.hpa.validation.metric.selector" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $metric.object "key" "object" "idx" $idx) -}}
+    {{- include "asa.v1.common.lib.hpa.validation.metric.selector" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $metric.object "key" "object" "idx" $idx) -}}
   {{- end -}}
 
   {{- if not (kindIs "map" $metric.object.describedObject) -}}
@@ -283,7 +283,7 @@
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.metrics.external" -}}
+{{- define "asa.v1.common.lib.hpa.validation.metrics.external" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $metric := .metric -}}
@@ -321,11 +321,11 @@
   {{- end -}}
 
   {{- if $metric.external.metric.selector -}}
-    {{- include "tc.v1.common.lib.hpa.validation.metric.selector" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $metric.external "key" "external" "idx" $idx) -}}
+    {{- include "asa.v1.common.lib.hpa.validation.metric.selector" (dict "objectData" $objectData "rootCtx" $rootCtx "data" $metric.external "key" "external" "idx" $idx) -}}
   {{- end -}}
 {{- end -}}
 
-{{- define "tc.v1.common.lib.hpa.validation.metrics.metric.target" -}}
+{{- define "asa.v1.common.lib.hpa.validation.metrics.metric.target" -}}
   {{- $objectData := .objectData -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $data := .metric -}}

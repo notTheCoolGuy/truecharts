@@ -1,4 +1,4 @@
-{{- define "tc.v1.common.lib.webhook.rules" -}}
+{{- define "asa.v1.common.lib.webhook.rules" -}}
   {{- $rules := .rules -}}
   {{- $rootCtx := .rootCtx }}
 rules:

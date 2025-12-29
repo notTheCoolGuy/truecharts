@@ -2,7 +2,7 @@
 This template serves as a blueprint for all Route objects that are created
 within the common library.
 */}}
-{{- define "tc.v1.common.class.route" -}}
+{{- define "asa.v1.common.class.route" -}}
 {{- $values := .Values.route -}}
 {{- if hasKey . "ObjectValues" -}}
   {{- with .ObjectValues.route -}}
@@ -13,14 +13,14 @@ within the common library.
   {{- $routeLabels := $values.labels -}}
   {{- $routeAnnotations := $values.annotations -}}
 
-{{- $fullName := include "tc.v1.common.lib.chart.names.fullname" . -}}
+{{- $fullName := include "asa.v1.common.lib.chart.names.fullname" . -}}
 {{- if and (hasKey $values "nameOverride") $values.nameOverride -}}
   {{- $fullName = printf "%v-%v" $fullName $values.nameOverride -}}
 {{- end -}}
 {{- $routeKind := $values.kind | default "HTTPRoute" -}}
 
 {{/* Get the name of the primary service, if any */}}
-{{- $primaryServiceName := (include "tc.v1.common.lib.util.service.primary" (dict "rootCtx" $)) -}}
+{{- $primaryServiceName := (include "asa.v1.common.lib.util.service.primary" (dict "rootCtx" $)) -}}
 {{/* Get service values of the primary service, if any */}}
 {{- $primaryService := get $.Values.service $primaryServiceName -}}
 {{- $defaultServiceName := $fullName -}}
@@ -28,7 +28,7 @@ within the common library.
 {{- if and (hasKey $primaryService "nameOverride") $primaryService.nameOverride -}}
   {{- $defaultServiceName = printf "%v-%v" $defaultServiceName $primaryService.nameOverride -}}
 {{- end -}}
-{{- $defaultServicePort := get $primaryService.ports (include "tc.v1.common.lib.util.service.ports.primary" (dict "svcValues" $primaryService "rootCtx" $)) }}
+{{- $defaultServicePort := get $primaryService.ports (include "asa.v1.common.lib.util.service.ports.primary" (dict "svcValues" $primaryService "rootCtx" $)) }}
 
 ---
 apiVersion: gateway.networking.k8s.io/v1alpha2
@@ -39,14 +39,14 @@ kind: {{ $routeKind }}
 metadata:
   name: {{ $fullName }}
   namespace: {{ $.Values.namespace | default $.Values.global.namespace | default $.Release.Namespace }}
-  {{- $labels := (mustMerge ($routeLabels | default dict) (include "tc.v1.common.lib.metadata.allLabels" $ | fromYaml)) -}}
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $ "labels" $labels) | trim) }}
+  {{- $labels := (mustMerge ($routeLabels | default dict) (include "asa.v1.common.lib.metadata.allLabels" $ | fromYaml)) -}}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $ "labels" $labels) | trim) }}
   labels:
     {{- . | nindent 4 }}
   {{- end -}}
-  {{- $annotations := (mustMerge ($routeAnnotations | default dict) (include "tc.v1.common.lib.metadata.allAnnotations" $ | fromYaml)) }}
+  {{- $annotations := (mustMerge ($routeAnnotations | default dict) (include "asa.v1.common.lib.metadata.allAnnotations" $ | fromYaml)) }}
   annotations:
-  {{- with (include "tc.v1.common.lib.metadata.render" (dict "rootCtx" $ "annotations" $annotations) | trim) }}
+  {{- with (include "asa.v1.common.lib.metadata.render" (dict "rootCtx" $ "annotations" $annotations) | trim) }}
     {{- . | nindent 4 }}
   {{- end }}
 spec:

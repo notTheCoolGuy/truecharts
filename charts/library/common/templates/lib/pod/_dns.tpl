@@ -1,10 +1,10 @@
 {{/* Returns DNS Policy and Config */}}
 {{/* Call this template:
-{{ include "tc.v1.common.lib.pod.dns" (dict "rootCtx" $ "objectData" $objectData) }}
+{{ include "asa.v1.common.lib.pod.dns" (dict "rootCtx" $ "objectData" $objectData) }}
 rootCtx: The root context of the chart.
 objectData: The object data to be used to render the Pod.
 */}}
-{{- define "tc.v1.common.lib.pod.dns" -}}
+{{- define "asa.v1.common.lib.pod.dns" -}}
   {{- $rootCtx := .rootCtx -}}
   {{- $objectData := .objectData -}}
 
@@ -33,7 +33,7 @@ objectData: The object data to be used to render the Pod.
   {{- $policy = (tpl $policy $rootCtx) -}}
 
   {{/* If hostNetwork is enabled, then use ClusterFirstWithHostNet */}}
-  {{- $hostNet := include "tc.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
+  {{- $hostNet := include "asa.v1.common.lib.pod.hostNetwork" (dict "rootCtx" $rootCtx "objectData" $objectData) -}}
   {{- if or (and (kindIs "string" $hostNet) (eq $hostNet "true")) (and (kindIs "bool" $hostNet) $hostNet) -}}
     {{- $policy = "ClusterFirstWithHostNet" -}}
   {{- end -}}
